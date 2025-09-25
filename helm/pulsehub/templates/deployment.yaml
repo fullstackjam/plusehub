@@ -1,26 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "pulsehub.fullname" . }}
-  labels:
-    {{- include "pulsehub.labels" . | nindent 4 }}
+  name: pulsehub
 spec:
-  replicas: {{ .Values.replicaCount }}
+  replicas: 1
   selector:
     matchLabels:
-      {{- include "pulsehub.selectorLabels" . | nindent 6 }}
+      app: pulsehub
   template:
     metadata:
       labels:
-        {{- include "pulsehub.selectorLabels" . | nindent 8 }}
+        app: pulsehub
     spec:
       containers:
-        - name: {{ .Chart.Name }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
-          ports:
-            - name: http
-              containerPort: 3001
-              protocol: TCP
-          resources:
-            {{- toYaml .Values.resources | nindent 12 }}
+      - name: pulsehub
+        image: fullstackjam/plusehub:latest
+        ports:
+        - containerPort: 3001

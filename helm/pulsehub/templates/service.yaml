@@ -1,15 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "pulsehub.fullname" . }}
-  labels:
-    {{- include "pulsehub.labels" . | nindent 4 }}
+  name: pulsehub-service
 spec:
-  type: {{ .Values.service.type }}
-  ports:
-    - port: {{ .Values.service.port }}
-      targetPort: http
-      protocol: TCP
-      name: http
   selector:
-    {{- include "pulsehub.selectorLabels" . | nindent 4 }}
+    app: pulsehub
+  ports:
+  - protocol: TCP
+    port: 3001
+    targetPort: 3001
+  type: ClusterIP
