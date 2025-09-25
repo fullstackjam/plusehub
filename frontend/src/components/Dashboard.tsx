@@ -31,11 +31,11 @@ const Dashboard: React.FC<DashboardProps> = ({ platforms, onPlatformsChange }) =
     }
   };
 
-  const handleDragStart = (e: React.DragEvent, platform: string) => {
+  const handleDragStart = (_e: React.DragEvent, platform: string) => {
     setDraggedPlatform(platform);
   };
 
-  const handleDragEnd = (e: React.DragEvent) => {
+  const handleDragEnd = (_e: React.DragEvent) => {
     setDraggedPlatform(null);
   };
 

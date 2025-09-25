@@ -1,7 +1,7 @@
 export interface HotTopic {
   title: string;
   url?: string;
-  hot?: string;
+  hot?: number;
   rank?: number;
   platforms?: string[];
 }

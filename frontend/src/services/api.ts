@@ -45,7 +45,6 @@ export class ApiService {
   }
 
   static generateAggregatedHotTopics(platformData: Record<string, PlatformResponse>): PlatformResponse | null {
-    const allTopics: { title: string; platforms: string[]; hot: number; url: string }[] = [];
     const topicMap = new Map<string, { platforms: string[]; hot: number; url: string }>();
 
     // 收集所有平台的热搜
