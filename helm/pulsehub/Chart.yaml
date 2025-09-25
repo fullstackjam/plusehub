@@ -1,18 +1,5 @@
 apiVersion: v2
 name: pulsehub
-description: A Helm chart for PulseHub - Real-time trending topics aggregator
-type: application
+description: A Helm chart for PulseHub - 聚合各大社交媒体平台实时热点榜单的Web应用
 version: 0.1.0
-appVersion: "1.0.0"
-keywords:
-  - trending
-  - social-media
-  - aggregation
-  - real-time
-home: https://github.com/your-org/pulsehub
-sources:
-  - https://github.com/your-org/pulsehub
-maintainers:
-  - name: PulseHub Team
-    email: team@pulsehub.com
-dependencies: []
+appVersion: 1.0.0
