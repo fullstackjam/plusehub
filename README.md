@@ -1,267 +1,259 @@
-# PulseHub
+# PulseHub - 社交媒体热点聚合平台
 
-PulseHub 是一个聚合各大社交媒体平台实时热点榜单的Web应用。用户可以在一个统一的页面上快速浏览来自微博、抖音、哔哩哔哩、知乎、百度等平台的热搜内容。
+PulseHub 是一个现代化的社交媒体热点聚合平台，实时收集和展示来自多个平台的热门话题，包括微博、抖音、B站、知乎等主流社交媒体平台。
 
-## 功能特性
+## ✨ 特性
 
-- 🔥 实时热点聚合：支持微博、抖音、哔哩哔哩、知乎、百度等平台
-- 📱 响应式设计：适配各种屏幕尺寸
-- ⚡ 快速加载：内置缓存机制，减少API请求
-- 🎨 现代化UI：使用Tailwind CSS构建的美观界面
-- 🔗 一键跳转：点击热点关键词直接跳转到对应平台搜索
+- 🔥 **实时热点聚合** - 收集10+主流平台的热门话题
+- 🎨 **现代化UI设计** - 采用玻璃拟态和渐变设计
+- 🖱️ **拖拽排序** - 支持卡片拖拽重新排序
+- 🔄 **独立刷新** - 每个平台可单独刷新数据
+- 📱 **响应式设计** - 完美适配各种设备
+- 🚀 **一键部署** - 支持Docker和Kubernetes部署
 
-## 技术栈
+## 🏗️ 技术栈
 
 ### 前端
-- React 18 + TypeScript
-- Vite 构建工具
-- Tailwind CSS 样式框架
-- 响应式网格布局
+- **React 18** - 现代化UI框架
+- **TypeScript** - 类型安全
+- **Vite** - 快速构建工具
+- **Tailwind CSS** - 原子化CSS框架
 
 ### 后端
-- Node.js + Express
-- TypeScript
-- 内存缓存机制
-- 60s API 数据源
+- **Node.js** - 运行时环境
+- **Express** - Web框架
+- **TypeScript** - 类型安全
+- **Axios** - HTTP客户端
 
-## 项目结构
+### 部署
+- **Docker** - 容器化
+- **Kubernetes** - 容器编排
+- **Helm** - 包管理
+- **Nginx Ingress** - 负载均衡
 
-```
-PulseHub/
-├── backend/                 # 后端服务
-│   ├── src/
-│   │   ├── routes/         # API路由
-│   │   ├── services/       # 服务层
-│   │   └── index.ts        # 入口文件
-│   ├── package.json
-│   └── tsconfig.json
-├── frontend/               # 前端应用
-│   ├── src/
-│   │   ├── components/     # React组件
-│   │   ├── services/       # API服务
-│   │   ├── types/          # TypeScript类型
-│   │   └── App.tsx         # 主应用组件
-│   ├── package.json
-│   └── vite.config.ts
-├── package.json            # 根目录配置
-└── README.md
-```
-
-## 快速开始
+## 🚀 快速开始
 
 ### 环境要求
 
-- Node.js 16+ 
-- npm 或 yarn
+- Node.js 18+
+- Docker 20+
+- Kubernetes 1.20+
+- Helm 3.0+
 
-### 安装依赖
+### 本地开发
 
+1. **克隆项目**
 ```bash
-# 安装所有依赖（包括前端和后端）
-npm run install:all
+git clone https://github.com/fullstackjam/plusehub.git
+cd plusehub
 ```
 
-### 开发模式
-
+2. **安装依赖**
 ```bash
-# 同时启动前端和后端开发服务器
-npm run dev
+# 安装根目录依赖
+npm install
+
+# 安装前端依赖
+cd frontend && npm install
+
+# 安装后端依赖
+cd ../backend && npm install
 ```
 
-这将启动：
-- 后端服务器：http://localhost:3001
-- 前端应用：http://localhost:3000
-
-### 单独运行
-
+3. **启动开发服务器**
 ```bash
-# 只运行后端
-npm run dev:backend
+# 启动后端（端口3001）
+cd backend && npm run dev
 
-# 只运行前端
-npm run dev:frontend
+# 启动前端（端口5173）
+cd frontend && npm run dev
 ```
 
-### 生产构建
+4. **访问应用**
+- 前端: http://localhost:5173
+- 后端API: http://localhost:3001/api
 
+### Docker部署
+
+1. **构建镜像**
 ```bash
-# 构建所有项目
-npm run build
-
-# 启动生产服务器
-npm start
+docker build -t pulsehub .
 ```
 
-## API 端点
-
-后端提供以下API端点：
-
-- `GET /api/weibo` - 微博热搜
-- `GET /api/douyin` - 抖音热榜
-- `GET /api/bilibili` - 哔哩哔哩热榜
-- `GET /api/zhihu` - 知乎热榜
-- `GET /api/baidu` - 百度热搜
-- `GET /api/health` - 健康检查
-
-## 缓存机制
-
-- 内存缓存：30分钟过期时间
-- 自动清理：定期清理过期数据
-- 错误处理：API失败时返回缓存数据
-
-## 开发说明
-
-### 后端开发
-
-1. 修改 `backend/src/routes/` 中的路由文件
-2. 在 `backend/src/services/` 中添加新的服务
-3. 使用 `npm run dev:backend` 启动开发服务器
-
-### 前端开发
-
-1. 修改 `frontend/src/components/` 中的组件
-2. 在 `frontend/src/services/` 中修改API调用
-3. 使用 `npm run dev:frontend` 启动开发服务器
-
-### 添加新平台
-
-1. 在 `backend/src/routes/` 中创建新的路由文件
-2. 在 `backend/src/services/api.ts` 中添加API方法
-3. 在 `frontend/src/App.tsx` 的 `PLATFORM_CONFIG` 中添加平台配置
-
-## 部署
-
-### 本地开发部署
-
+2. **运行容器**
 ```bash
-# 后端部署
-cd backend
-npm run build
-npm start
+# 前台运行
+docker run -p 3001:3001 pulsehub
 
-# 前端部署
-cd frontend
-npm run build
-# 将 dist 目录部署到静态文件服务器
+# 后台运行
+docker run -d -p 3001:3001 --name pulsehub pulsehub
 ```
 
-### Docker 部署
+3. **访问应用**
+- 应用地址: http://localhost:3001
 
-#### 使用 Docker Compose（推荐）
+### Kubernetes部署
 
+1. **使用Helm部署**
 ```bash
-# 构建并启动服务
-docker-compose up -d
+# 创建命名空间
+kubectl create namespace plusehub
 
-# 查看日志
-docker-compose logs -f
+# 部署应用
+helm install plusehub ./helm/pulsehub -n plusehub
 
-# 停止服务
-docker-compose down
+# 查看部署状态
+kubectl get pods -n plusehub
 ```
 
-#### 使用 Docker 命令
+2. **访问应用**
+- 应用地址: https://plusehub.fullstackjam.com
 
-```bash
-# 构建镜像
-docker build -t pulsehub:latest .
+## 📁 项目结构
 
-# 运行容器
-docker run -p 3001:3001 pulsehub:latest
+```
+PulseHub/
+├── frontend/                 # 前端React应用
+│   ├── src/
+│   │   ├── components/      # React组件
+│   │   ├── services/        # API服务
+│   │   ├── types/          # TypeScript类型定义
+│   │   └── App.tsx         # 主应用组件
+│   ├── public/             # 静态资源
+│   └── package.json
+├── backend/                 # 后端Node.js应用
+│   ├── src/
+│   │   ├── services/       # 业务逻辑服务
+│   │   ├── routes/         # API路由
+│   │   └── index.ts        # 应用入口
+│   └── package.json
+├── helm/                   # Helm Charts
+│   └── pulsehub/
+│       ├── templates/      # Kubernetes模板
+│       ├── Chart.yaml      # Chart元数据
+│       └── values.yaml     # 配置值
+├── .github/                # GitHub Actions
+│   └── workflows/
+├── Dockerfile              # Docker构建文件
+└── package.json           # 根目录依赖
 ```
 
-### Kubernetes 部署
+## 🔧 配置说明
 
-#### 使用 Helm（推荐）
+### 环境变量
 
-```bash
-# 快速部署
-./deploy.sh
+| 变量名 | 默认值 | 说明 |
+|--------|--------|------|
+| `PORT` | `3001` | 后端服务端口 |
+| `NODE_ENV` | `development` | 运行环境 |
 
-# 自定义部署
-./deploy.sh -n pulsehub -t v1.0.0
+### Helm配置
 
-# 查看帮助
-./deploy.sh --help
-```
-
-#### 手动 Helm 部署
-
-```bash
-# 构建 Docker 镜像
-docker build -t pulsehub:latest .
-
-# 安装 Helm Chart
-helm install pulsehub ./helm/pulsehub
-
-# 升级部署
-helm upgrade pulsehub ./helm/pulsehub
-
-# 卸载部署
-helm uninstall pulsehub
-```
-
-#### 清理资源
-
-```bash
-# 清理 Kubernetes 资源
-./cleanup.sh
-
-# 清理包括 Docker 镜像
-./cleanup.sh --cleanup-images
-```
-
-### 生产环境配置
-
-#### 环境变量
-
-```bash
-NODE_ENV=production
-PORT=3001
-```
-
-#### 资源配置
+主要配置项在 `helm/pulsehub/values.yaml`:
 
 ```yaml
-# helm/pulsehub/values.yaml
-resources:
-  limits:
-    cpu: 1000m
-    memory: 1Gi
-  requests:
-    cpu: 500m
-    memory: 512Mi
-```
-
-#### Ingress 配置
-
-```yaml
+replicaCount: 1                    # 副本数量
+image:
+  repository: fullstackjam/plusehub # 镜像仓库
+  tag: latest                      # 镜像标签
 ingress:
-  enabled: true
-  className: "nginx"
+  enabled: true                    # 启用Ingress
   hosts:
-    - host: pulsehub.fullstackjam.com
-      paths:
-        - path: /
-          pathType: Prefix
-  tls:
-    - secretName: pulsehub-tls
-      hosts:
-        - pulsehub.fullstackjam.com
+    - host: plusehub.fullstackjam.com # 域名
 ```
 
-## 许可证
+## 📊 支持的数据源
 
-MIT License
+- **微博热搜** - 实时热门话题
+- **抖音热榜** - 短视频平台热点
+- **B站热榜** - 视频平台热门内容
+- **知乎热榜** - 知识问答平台热点
+- **百度热搜** - 搜索引擎热点
+- **今日头条** - 新闻资讯热点
+- **36氪热榜** - 科技创投热点
+- **虎嗅热文** - 商业科技资讯
+- **豆瓣热榜** - 文化娱乐热点
+- **虎扑热榜** - 体育社区热点
 
-## 贡献
+## 🛠️ 开发指南
 
-欢迎提交 Issue 和 Pull Request！
+### 添加新的数据源
 
-## 更新日志
+1. **后端API服务**
+```typescript
+// backend/src/services/api.ts
+static async getNewPlatformHot(): Promise<HotTopic[]> {
+  // 实现数据获取逻辑
+  return topics;
+}
+```
 
-### v1.0.0
-- 初始版本发布
-- 支持5个主流社交媒体平台
-- 响应式设计
-- 缓存机制
+2. **前端配置**
+```typescript
+// frontend/src/App.tsx
+const PLATFORM_CONFIG = [
+  // ... 现有配置
+  {
+    platform: 'newplatform',
+    displayName: '新平台热榜',
+    icon: '新',
+    color: '#ff6b35'
+  }
+];
+```
+
+### 自定义样式
+
+项目使用Tailwind CSS，可以通过修改 `frontend/src/index.css` 来自定义样式：
+
+```css
+/* 自定义卡片样式 */
+.custom-card {
+  @apply rounded-2xl shadow-xl border border-white/20;
+  @apply hover:shadow-2xl hover:scale-105 transition-all duration-500;
+}
+```
+
+## 🚀 CI/CD
+
+项目使用GitHub Actions进行持续集成和部署：
+
+- **CI流程** - 代码检查、类型检查、构建测试
+- **Docker构建** - 自动构建并推送到Docker Hub
+- **Kubernetes部署** - 自动部署到K8s集群
+
+## 📝 更新日志
+
+### v1.0.0 (2024-09-26)
+- ✨ 初始版本发布
+- 🔥 支持10+平台热点聚合
+- 🎨 现代化UI设计
+- 🖱️ 拖拽排序功能
+- 🔄 独立刷新功能
+- 🚀 Docker和Kubernetes部署支持
+
+## 🤝 贡献指南
+
+1. Fork 项目
+2. 创建特性分支 (`git checkout -b feature/AmazingFeature`)
+3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
+4. 推送到分支 (`git push origin feature/AmazingFeature`)
+5. 开启 Pull Request
+
+## 📄 许可证
+
+本项目采用 MIT 许可证 - 查看 [LICENSE](LICENSE) 文件了解详情
+
+## 👥 作者
+
+- **fullstackjam** - *初始开发* - [GitHub](https://github.com/fullstackjam)
+
+## 🙏 致谢
+
+- 感谢所有开源项目的贡献者
+- 感谢各个平台提供的公开API
+- 感谢社区的支持和反馈
+
+---
+
+**PulseHub** - 让热点信息触手可及 🔥
