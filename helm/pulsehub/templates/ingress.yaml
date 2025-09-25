@@ -21,7 +21,7 @@ spec:
               service:
                 name: plusehub
                 port:
-                  number: 80
+                  number: 3001
     {{- end }}
   {{- end }}
   tls:
