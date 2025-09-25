@@ -90,11 +90,12 @@
   }
   
   .refresh-button {
-    @apply fixed bottom-8 right-8 w-14 h-14 rounded-full;
+    @apply fixed top-8 right-8 w-14 h-14 rounded-full;
     @apply bg-gradient-to-r from-blue-500 to-blue-600 text-white;
     @apply shadow-2xl hover:shadow-2xl hover:scale-110;
     @apply transition-all duration-300 ease-out;
     @apply flex items-center justify-center;
+    @apply z-50;
   }
   
   .card-refresh-btn {
