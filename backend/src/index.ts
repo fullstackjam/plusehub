@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import path from 'path';
 import { weiboRouter } from './routes/weibo';
 import { douyinRouter } from './routes/douyin';
 import { bilibiliRouter } from './routes/bilibili';
@@ -39,8 +40,17 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'OK', timestamp: new Date().toISOString() });
 });
 
+// Serve static files from frontend build
+app.use(express.static(path.join(__dirname, '../../frontend/dist')));
+
+// Handle React routing, return all requests to React app
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../../frontend/dist/index.html'));
+});
+
 // Start server
 app.listen(PORT, () => {
   console.log(`🚀 PulseHub Backend running on port ${PORT}`);
   console.log(`📊 Health check: http://localhost:${PORT}/api/health`);
+  console.log(`🌐 Frontend served at: http://localhost:${PORT}/`);
 });
