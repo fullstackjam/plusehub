@@ -1,19 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: pulsehub
+  name: plusehub
 spec:
-  replicas: 1
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: pulsehub
+      app: plusehub
   template:
     metadata:
       labels:
-        app: pulsehub
+        app: plusehub
     spec:
       containers:
-      - name: pulsehub
-        image: fullstackjam/plusehub:latest
+      - name: plusehub
+        image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
-        - containerPort: 3001
+        - containerPort: 80

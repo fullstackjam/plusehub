@@ -1,5 +1,5 @@
 apiVersion: v2
 name: pulsehub
-description: A Helm chart for PulseHub - 聚合各大社交媒体平台实时热点榜单的Web应用
+description: A Helm chart for PulseHub
 version: 0.1.0
 appVersion: 1.0.0
