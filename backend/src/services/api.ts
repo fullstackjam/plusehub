@@ -5,7 +5,7 @@ const API_BASE_URL = 'https://60s.viki.moe';
 export interface HotTopic {
   title: string;
   url?: string;
-  hot?: string;
+  hot?: number;
   rank?: number;
 }
 
