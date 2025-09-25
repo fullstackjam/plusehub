@@ -116,4 +116,15 @@
     @apply shadow-lg border border-blue-400/20;
     @apply hover:shadow-xl hover:scale-105 transition-all duration-200;
   }
+  
+  .github-link {
+    @apply p-2 rounded-xl bg-white/10 hover:bg-white/20;
+    @apply backdrop-blur-sm border border-white/20;
+    @apply transition-all duration-300 ease-out;
+    @apply hover:shadow-lg hover:scale-110;
+  }
+  
+  .github-link:hover {
+    @apply shadow-xl;
+  }
 }
