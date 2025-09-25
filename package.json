@@ -1,0 +1,40 @@
+{
+  "name": "pulsehub",
+  "version": "1.0.0",
+  "description": "PulseHub - 聚合各大社交媒体平台实时热点榜单的Web应用",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "build": "npm run build:backend && npm run build:frontend",
+    "build:backend": "cd backend && npm run build",
+    "build:frontend": "cd frontend && npm run build",
+    "install:all": "npm install && cd backend && npm install && cd ../frontend && npm install",
+    "start": "cd backend && npm start",
+    "start:prod": "cd backend && npm run start:prod",
+    "docker:build": "docker build -t pulsehub .",
+    "docker:run": "docker run -p 3001:3001 pulsehub",
+    "docker:compose": "docker-compose up -d",
+    "helm:install": "helm install pulsehub ./helm/pulsehub",
+    "helm:upgrade": "helm upgrade pulsehub ./helm/pulsehub",
+    "helm:uninstall": "helm uninstall pulsehub"
+  },
+  "keywords": [
+    "social-media",
+    "hot-topics",
+    "weibo",
+    "douyin",
+    "bilibili",
+    "zhihu",
+    "baidu",
+    "react",
+    "nodejs",
+    "typescript"
+  ],
+  "author": "PulseHub Team",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

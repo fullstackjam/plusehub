@@ -1,0 +1,19 @@
+{
+  "name": "PulseHub",
+  "image": "mcr.microsoft.com/devcontainers/typescript-node:1-18-bullseye",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-vscode.vscode-typescript-next",
+        "bradlc.vscode-tailwindcss",
+        "esbenp.prettier-vscode"
+      ]
+    }
+  },
+  "forwardPorts": [3000, 3001],
+  "postCreateCommand": "npm run install:all",
+  "remoteUser": "node"
+}
