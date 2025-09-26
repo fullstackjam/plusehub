@@ -15,27 +15,15 @@ spec:
       labels:
         {{- include "pulsehub.selectorLabels" . | nindent 8 }}
     spec:
-      serviceAccountName: {{ include "pulsehub.fullname" . }}
       containers:
         - name: pulsehub
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-          imagePullPolicy: IfNotPresent
           ports:
-            - name: http
-              containerPort: 80
+            - containerPort: 80
               protocol: TCP
-          livenessProbe:
-            httpGet:
-              path: /
-              port: http
-          readinessProbe:
-            httpGet:
-              path: /
-              port: http
+              name: http
           resources:
             limits:
-              cpu: 100m
               memory: 128Mi
             requests:
-              cpu: 100m
-              memory: 128Mi
+              memory: 64Mi

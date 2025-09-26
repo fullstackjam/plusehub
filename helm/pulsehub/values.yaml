@@ -1,13 +1,9 @@
-# Default values for pulsehub
+# Minimal values for pulsehub
 replicaCount: 1
 
 image:
   repository: fullstackjam/pulsehub
   tag: latest
-
-service:
-  type: ClusterIP
-  port: 80
 
 ingress:
   enabled: true
