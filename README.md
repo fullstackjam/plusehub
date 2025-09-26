@@ -1,213 +1,213 @@
-# PulseHub - 社交媒体热点聚合平台
+# PulseHub - Social Media Hot Topics Aggregation Platform
 
-PulseHub 是一个现代化的社交媒体热点聚合平台，实时收集和展示来自多个平台的热门话题，包括微博、抖音、B站、知乎等主流社交媒体平台。
+PulseHub is a modern social media hot topics aggregation platform that collects and displays trending topics from multiple platforms in real-time, including Weibo, Douyin, Bilibili, Zhihu and other mainstream social media platforms.
 
-## ✨ 特性
+## ✨ Features
 
-- 🔥 **实时热点聚合** - 收集10+主流平台的热门话题
-- 🎨 **现代化UI设计** - 采用玻璃拟态和渐变设计
-- 🖱️ **拖拽排序** - 支持卡片拖拽重新排序
-- 🔄 **独立刷新** - 每个平台可单独刷新数据
-- 📱 **响应式设计** - 完美适配各种设备
-- 🚀 **一键部署** - 支持Docker和Kubernetes部署
+- 🔥 **Real-time Hot Topics Aggregation** - Collect trending topics from 10+ mainstream platforms
+- 🎨 **Modern UI Design** - Features glassmorphism and gradient design
+- 🖱️ **Drag & Drop Sorting** - Support card drag and drop reordering
+- 🔄 **Independent Refresh** - Each platform can refresh data independently
+- 📱 **Responsive Design** - Perfect adaptation to various devices
+- 🚀 **One-click Deployment** - Support Docker and Kubernetes deployment
 
-## 🏗️ 技术栈
+## 🏗️ Tech Stack
 
-### 前端
-- **React 18** - 现代化UI框架
-- **TypeScript** - 类型安全
-- **Vite** - 快速构建工具
-- **Tailwind CSS** - 原子化CSS框架
+### Frontend
+- **React 18** - Modern UI framework
+- **TypeScript** - Type safety
+- **Vite** - Fast build tool
+- **Tailwind CSS** - Atomic CSS framework
 
-### 后端
-- **Node.js** - 运行时环境
-- **Express** - Web框架
-- **TypeScript** - 类型安全
-- **Axios** - HTTP客户端
+### Backend
+- **Node.js** - Runtime environment
+- **Express** - Web framework
+- **TypeScript** - Type safety
+- **Axios** - HTTP client
 
-### 部署
-- **Docker** - 容器化
-- **Kubernetes** - 容器编排
-- **Helm** - 包管理
-- **Nginx Ingress** - 负载均衡
+### Deployment
+- **Docker** - Containerization
+- **Kubernetes** - Container orchestration
+- **Helm** - Package management
+- **Nginx Ingress** - Load balancing
 
-## 🚀 快速开始
+## 🚀 Quick Start
 
-### 环境要求
+### Requirements
 
 - Node.js 18+
 - Docker 20+
 - Kubernetes 1.20+
 - Helm 3.0+
 
-### 本地开发
+### Local Development
 
-1. **克隆项目**
+1. **Clone the project**
 ```bash
 git clone https://github.com/fullstackjam/plusehub.git
 cd plusehub
 ```
 
-2. **安装依赖**
+2. **Install dependencies**
 ```bash
-# 安装根目录依赖
+# Install root dependencies
 npm install
 
-# 安装前端依赖
+# Install frontend dependencies
 cd frontend && npm install
 
-# 安装后端依赖
+# Install backend dependencies
 cd ../backend && npm install
 ```
 
-3. **启动开发服务器**
+3. **Start development servers**
 ```bash
-# 启动后端（端口3001）
+# Start backend (port 3001)
 cd backend && npm run dev
 
-# 启动前端（端口5173）
+# Start frontend (port 5173)
 cd frontend && npm run dev
 ```
 
-4. **访问应用**
-- 前端: http://localhost:5173
-- 后端API: http://localhost:3001/api
+4. **Access the application**
+- Frontend: http://localhost:5173
+- Backend API: http://localhost:3001/api
 
-### Docker部署
+### Docker Deployment
 
-1. **构建镜像**
+1. **Build image**
 ```bash
 docker build -t pulsehub .
 ```
 
-2. **运行容器**
+2. **Run container**
 ```bash
-# 前台运行
+# Run in foreground
 docker run -p 3001:3001 pulsehub
 
-# 后台运行
+# Run in background
 docker run -d -p 3001:3001 --name pulsehub pulsehub
 ```
 
-3. **访问应用**
-- 应用地址: http://localhost:3001
+3. **Access the application**
+- Application URL: http://localhost:3001
 
-### Kubernetes部署
+### Kubernetes Deployment
 
-1. **使用Helm部署**
+1. **Deploy using Helm**
 ```bash
-# 创建命名空间
+# Create namespace
 kubectl create namespace plusehub
 
-# 部署应用
+# Deploy application
 helm install plusehub ./helm/pulsehub -n plusehub
 
-# 查看部署状态
+# Check deployment status
 kubectl get pods -n plusehub
 ```
 
-2. **访问应用**
-- 应用地址: https://plusehub.fullstackjam.com
+2. **Access the application**
+- Application URL: https://plusehub.fullstackjam.com
 
-## 📁 项目结构
+## 📁 Project Structure
 
 ```
 PulseHub/
-├── frontend/                 # 前端React应用
+├── frontend/                 # Frontend React application
 │   ├── src/
-│   │   ├── components/      # React组件
-│   │   ├── services/        # API服务
-│   │   ├── types/          # TypeScript类型定义
-│   │   └── App.tsx         # 主应用组件
-│   ├── public/             # 静态资源
+│   │   ├── components/      # React components
+│   │   ├── services/        # API services
+│   │   ├── types/          # TypeScript type definitions
+│   │   └── App.tsx         # Main application component
+│   ├── public/             # Static assets
 │   └── package.json
-├── backend/                 # 后端Node.js应用
+├── backend/                 # Backend Node.js application
 │   ├── src/
-│   │   ├── services/       # 业务逻辑服务
-│   │   ├── routes/         # API路由
-│   │   └── index.ts        # 应用入口
+│   │   ├── services/       # Business logic services
+│   │   ├── routes/         # API routes
+│   │   └── index.ts        # Application entry point
 │   └── package.json
 ├── helm/                   # Helm Charts
 │   └── pulsehub/
-│       ├── templates/      # Kubernetes模板
-│       ├── Chart.yaml      # Chart元数据
-│       └── values.yaml     # 配置值
+│       ├── templates/      # Kubernetes templates
+│       ├── Chart.yaml      # Chart metadata
+│       └── values.yaml     # Configuration values
 ├── .github/                # GitHub Actions
 │   └── workflows/
-├── Dockerfile              # Docker构建文件
-└── package.json           # 根目录依赖
+├── Dockerfile              # Docker build file
+└── package.json           # Root dependencies
 ```
 
-## 🔧 配置说明
+## 🔧 Configuration
 
-### 环境变量
+### Environment Variables
 
-| 变量名 | 默认值 | 说明 |
-|--------|--------|------|
-| `PORT` | `3001` | 后端服务端口 |
-| `NODE_ENV` | `development` | 运行环境 |
+| Variable | Default Value | Description |
+|----------|---------------|-------------|
+| `PORT` | `3001` | Backend service port |
+| `NODE_ENV` | `development` | Runtime environment |
 
-### Helm配置
+### Helm Configuration
 
-主要配置项在 `helm/pulsehub/values.yaml`:
+Main configuration items in `helm/pulsehub/values.yaml`:
 
 ```yaml
-replicaCount: 1                    # 副本数量
+replicaCount: 1                    # Number of replicas
 image:
-  repository: fullstackjam/plusehub # 镜像仓库
-  tag: latest                      # 镜像标签
+  repository: fullstackjam/plusehub # Image repository
+  tag: latest                      # Image tag
 ingress:
-  enabled: true                    # 启用Ingress
+  enabled: true                    # Enable Ingress
   hosts:
-    - host: plusehub.fullstackjam.com # 域名
+    - host: plusehub.fullstackjam.com # Domain name
 ```
 
-## 📊 支持的数据源
+## 📊 Supported Data Sources
 
-- **微博热搜** - 实时热门话题
-- **抖音热榜** - 短视频平台热点
-- **B站热榜** - 视频平台热门内容
-- **知乎热榜** - 知识问答平台热点
-- **百度热搜** - 搜索引擎热点
-- **今日头条** - 新闻资讯热点
-- **36氪热榜** - 科技创投热点
-- **虎嗅热文** - 商业科技资讯
-- **豆瓣热榜** - 文化娱乐热点
-- **虎扑热榜** - 体育社区热点
+- **Weibo Hot Search** - Real-time trending topics
+- **Douyin Hot List** - Short video platform hotspots
+- **Bilibili Hot List** - Video platform popular content
+- **Zhihu Hot List** - Knowledge Q&A platform hotspots
+- **Baidu Hot Search** - Search engine hotspots
+- **Toutiao Hot List** - News and information hotspots
+- **36Kr Hot List** - Technology and venture capital hotspots
+- **Huxiu Hot Articles** - Business and technology news
+- **Douban Hot List** - Culture and entertainment hotspots
+- **Hupu Hot List** - Sports community hotspots
 
-## 🛠️ 开发指南
+## 🛠️ Development Guide
 
-### 添加新的数据源
+### Adding New Data Sources
 
-1. **后端API服务**
+1. **Backend API Service**
 ```typescript
 // backend/src/services/api.ts
 static async getNewPlatformHot(): Promise<HotTopic[]> {
-  // 实现数据获取逻辑
+  // Implement data fetching logic
   return topics;
 }
 ```
 
-2. **前端配置**
+2. **Frontend Configuration**
 ```typescript
 // frontend/src/App.tsx
 const PLATFORM_CONFIG = [
-  // ... 现有配置
+  // ... existing configuration
   {
     platform: 'newplatform',
-    displayName: '新平台热榜',
-    icon: '新',
+    displayName: 'New Platform Hot List',
+    icon: 'N',
     color: '#ff6b35'
   }
 ];
 ```
 
-### 自定义样式
+### Custom Styling
 
-项目使用Tailwind CSS，可以通过修改 `frontend/src/index.css` 来自定义样式：
+The project uses Tailwind CSS, you can customize styles by modifying `frontend/src/index.css`:
 
 ```css
-/* 自定义卡片样式 */
+/* Custom card styles */
 .custom-card {
   @apply rounded-2xl shadow-xl border border-white/20;
   @apply hover:shadow-2xl hover:scale-105 transition-all duration-500;
@@ -216,44 +216,44 @@ const PLATFORM_CONFIG = [
 
 ## 🚀 CI/CD
 
-项目使用GitHub Actions进行持续集成和部署：
+The project uses GitHub Actions for continuous integration and deployment:
 
-- **CI流程** - 代码检查、类型检查、构建测试
-- **Docker构建** - 自动构建并推送到Docker Hub
-- **Kubernetes部署** - 自动部署到K8s集群
+- **CI Pipeline** - Code checking, type checking, build testing
+- **Docker Build** - Automatic build and push to Docker Hub
+- **Kubernetes Deployment** - Automatic deployment to K8s cluster
 
-## 📝 更新日志
+## 📝 Changelog
 
 ### v1.0.0 (2024-09-26)
-- ✨ 初始版本发布
-- 🔥 支持10+平台热点聚合
-- 🎨 现代化UI设计
-- 🖱️ 拖拽排序功能
-- 🔄 独立刷新功能
-- 🚀 Docker和Kubernetes部署支持
+- ✨ Initial version release
+- 🔥 Support for 10+ platform hot topic aggregation
+- 🎨 Modern UI design
+- 🖱️ Drag and drop sorting functionality
+- 🔄 Independent refresh functionality
+- 🚀 Docker and Kubernetes deployment support
 
-## 🤝 贡献指南
+## 🤝 Contributing
 
-1. Fork 项目
-2. 创建特性分支 (`git checkout -b feature/AmazingFeature`)
-3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
-4. 推送到分支 (`git push origin feature/AmazingFeature`)
-5. 开启 Pull Request
+1. Fork the project
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-## 📄 许可证
+## 📄 License
 
-本项目采用 MIT 许可证 - 查看 [LICENSE](LICENSE) 文件了解详情
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
 
-## 👥 作者
+## 👥 Authors
 
-- **fullstackjam** - *初始开发* - [GitHub](https://github.com/fullstackjam)
+- **fullstackjam** - *Initial development* - [GitHub](https://github.com/fullstackjam)
 
-## 🙏 致谢
+## 🙏 Acknowledgments
 
-- 感谢所有开源项目的贡献者
-- 感谢各个平台提供的公开API
-- 感谢社区的支持和反馈
+- Thanks to all contributors of open source projects
+- Thanks to all platforms for providing public APIs
+- Thanks to the community for support and feedback
 
 ---
 
-**PulseHub** - 让热点信息触手可及 🔥
+**PulseHub** - Making hot topics accessible 🔥

@@ -1,10 +1,10 @@
 # PulseHub Helm Chart
 
-这是一个用于部署 PulseHub 应用的 Helm Chart。
+This is a Helm Chart for deploying the PulseHub application.
 
-## 安装
+## Installation
 
-### 使用 Helm 直接安装
+### Direct Installation with Helm
 
 ```bash
 helm install pulsehub ./helm/pulsehub \
@@ -12,15 +12,15 @@ helm install pulsehub ./helm/pulsehub \
   --create-namespace
 ```
 
-### 使用 ArgoCD 安装
+### Installation with ArgoCD
 
-在 ArgoCD 中创建一个 Application，指向这个仓库：
+Create an Application in ArgoCD pointing to this repository:
 
 ```yaml
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: plusehub-custom
+  name: plusehub
   namespace: argocd
 spec:
   project: default
@@ -37,21 +37,21 @@ spec:
       selfHeal: true
 ```
 
-## 配置
+## Configuration
 
-### 主要配置项
+### Main Configuration Items
 
-- `replicaCount`: 副本数量
-- `image.repository`: 镜像仓库
-- `image.tag`: 镜像标签
-- `service.port`: 服务端口
-- `ingress.enabled`: 是否启用 Ingress
-- `ingress.hosts`: Ingress 主机配置
-- `resources`: 资源限制和请求
+- `replicaCount`: Number of replicas
+- `image.repository`: Image repository
+- `image.tag`: Image tag
+- `service.port`: Service port
+- `ingress.enabled`: Whether to enable Ingress
+- `ingress.hosts`: Ingress host configuration
+- `resources`: Resource limits and requests
 
-### 自定义配置
+### Custom Configuration
 
-可以通过 values.yaml 文件或命令行参数来自定义配置：
+You can customize the configuration through values.yaml file or command line parameters:
 
 ```bash
 helm install pulsehub ./helm/pulsehub \
@@ -60,11 +60,11 @@ helm install pulsehub ./helm/pulsehub \
   --set ingress.hosts[0].host=myapp.example.com
 ```
 
-## 特性
+## Features
 
-- 支持多副本部署
-- 自动资源管理
-- 灵活的 Ingress 配置
-- TLS 证书自动管理
-- 外部 DNS 集成
-- 完整的标签和选择器支持
+- Support for multi-replica deployment
+- Automatic resource management
+- Flexible Ingress configuration
+- Automatic TLS certificate management
+- External DNS integration
+- Complete label and selector support

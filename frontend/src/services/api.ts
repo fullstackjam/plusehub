@@ -35,7 +35,7 @@ export class ApiService {
       return acc;
     }, {} as Record<string, PlatformResponse>);
 
-    // 生成聚合热搜
+    // Generate aggregated hot topics
     const aggregatedData = this.generateAggregatedHotTopics(platformData);
     if (aggregatedData) {
       platformData['aggregated'] = aggregatedData;
@@ -47,12 +47,12 @@ export class ApiService {
   static generateAggregatedHotTopics(platformData: Record<string, PlatformResponse>): PlatformResponse | null {
     const topicMap = new Map<string, { platforms: string[]; hot: number; url: string }>();
 
-    // 收集所有平台的热搜
+    // Collect hot topics from all platforms
     Object.entries(platformData).forEach(([platform, data]) => {
       if (data && data.topics) {
         data.topics.forEach(topic => {
           const title = topic.title.toLowerCase().trim();
-          if (title.length > 2) { // 过滤太短的标题
+          if (title.length > 2) { // Filter titles that are too short
             if (topicMap.has(title)) {
               const existing = topicMap.get(title)!;
               existing.platforms.push(platform);
@@ -69,7 +69,7 @@ export class ApiService {
       }
     });
 
-    // 找出在多个平台都出现的热搜
+    // Find hot topics that appear on multiple platforms
     const multiPlatformTopics = Array.from(topicMap.entries())
       .filter(([_, data]) => data.platforms.length >= 2)
       .map(([title, data]) => ({

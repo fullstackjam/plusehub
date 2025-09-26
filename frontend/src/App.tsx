@@ -6,67 +6,67 @@ import { ApiService } from './services/api';
 const PLATFORM_CONFIG = [
   {
     platform: 'weibo',
-    displayName: '微博热搜',
-    icon: '微',
+    displayName: 'Weibo Hot Search',
+    icon: 'W',
     color: '#ff6b35'
   },
   {
     platform: 'douyin',
-    displayName: '抖音热榜',
-    icon: '抖',
+    displayName: 'Douyin Hot List',
+    icon: 'D',
     color: '#000000'
   },
   {
     platform: 'bilibili',
-    displayName: '哔哩哔哩',
+    displayName: 'Bilibili Hot List',
     icon: 'B',
     color: '#00a1d6'
   },
   {
     platform: 'zhihu',
-    displayName: '知乎热榜',
-    icon: '知',
+    displayName: 'Zhihu Hot List',
+    icon: 'Z',
     color: '#0084ff'
   },
   {
     platform: 'baidu',
-    displayName: '百度热搜',
-    icon: '百',
+    displayName: 'Baidu Hot Search',
+    icon: 'B',
     color: '#2932e1'
   },
   {
     platform: 'toutiao',
-    displayName: '今日头条',
-    icon: '头',
+    displayName: 'Toutiao Hot List',
+    icon: 'T',
     color: '#ff6600'
   },
   {
     platform: '36kr',
-    displayName: '36氪热榜',
+    displayName: '36Kr Hot List',
     icon: '36',
     color: '#00d4aa'
   },
   {
     platform: 'huxiu',
-    displayName: '虎嗅热文',
-    icon: '虎',
+    displayName: 'Huxiu Hot Articles',
+    icon: 'H',
     color: '#ff6b35'
   },
   {
     platform: 'douban',
-    displayName: '豆瓣新片',
-    icon: '豆',
+    displayName: 'Douban Hot Movies',
+    icon: 'D',
     color: '#007722'
   },
   {
     platform: 'hupu',
-    displayName: '虎扑热帖',
-    icon: '虎',
+    displayName: 'Hupu Hot Posts',
+    icon: 'H',
     color: '#ff6b35'
   },
   {
     platform: 'aggregated',
-    displayName: '聚合热搜',
+    displayName: 'Aggregated Hot Topics',
     icon: '🔥',
     color: '#ff6b35'
   }
@@ -105,7 +105,7 @@ function App() {
           ...platform,
           data: platformData || null,
           loading: false,
-          error: platformData ? null : '数据获取失败'
+          error: platformData ? null : 'Data fetch failed'
         };
       });
 
@@ -116,7 +116,7 @@ function App() {
       const updatedPlatforms = platformList.map(platform => ({
         ...platform,
         loading: false,
-        error: '网络连接失败'
+        error: 'Network connection failed'
       }));
 
       setPlatforms(updatedPlatforms);
@@ -144,8 +144,8 @@ function App() {
             <span className="text-white text-2xl font-bold">P</span>
           </div>
           <div className="loading-spinner mx-auto mb-4"></div>
-          <p className="text-slate-600 text-lg font-medium">正在加载热点数据...</p>
-          <p className="text-slate-500 text-sm mt-2">请稍候，正在为您聚合最新热点</p>
+          <p className="text-slate-600 text-lg font-medium">Loading hot topics data...</p>
+          <p className="text-slate-500 text-sm mt-2">Please wait, aggregating the latest hot topics for you</p>
         </div>
       </div>
     );
@@ -163,7 +163,7 @@ function App() {
         onClick={refreshData}
         disabled={loading}
         className="refresh-button group"
-        title="刷新数据"
+        title="Refresh Data"
       >
         <svg 
           className={`w-6 h-6 transition-all duration-300 ${loading ? 'animate-spin' : 'group-hover:rotate-180'}`} 

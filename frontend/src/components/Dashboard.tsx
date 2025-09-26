@@ -24,7 +24,7 @@ const Dashboard: React.FC<DashboardProps> = ({ platforms, onPlatformsChange }) =
       console.error(`Error refreshing ${platform}:`, error);
       const updatedPlatforms = platforms.map(p => 
         p.platform === platform 
-          ? { ...p, loading: false, error: '刷新失败' }
+          ? { ...p, loading: false, error: 'Refresh failed' }
           : p
       );
       onPlatformsChange?.(updatedPlatforms);
@@ -73,12 +73,12 @@ const Dashboard: React.FC<DashboardProps> = ({ platforms, onPlatformsChange }) =
               </div>
               <div>
                 <h1 className="text-4xl font-bold text-white tracking-tight">PulseHub</h1>
-                <p className="mt-2 text-slate-300 text-lg">实时热搜聚合平台</p>
+                <p className="mt-2 text-slate-300 text-lg">Real-time Hot Topics Aggregation Platform</p>
               </div>
             </div>
             <div className="flex items-center space-x-6">
               <div className="text-right">
-                <div className="text-slate-300 text-sm mb-1">最后更新</div>
+                <div className="text-slate-300 text-sm mb-1">Last Updated</div>
                 <div className="text-white font-medium">
                   {new Date().toLocaleString()}
                 </div>
@@ -90,7 +90,7 @@ const Dashboard: React.FC<DashboardProps> = ({ platforms, onPlatformsChange }) =
                 target="_blank"
                 rel="noopener noreferrer"
                 className="github-link group"
-                title="查看源代码"
+                title="View Source Code"
               >
                 <svg 
                   className="w-8 h-8 text-white/80 group-hover:text-white transition-all duration-300 group-hover:scale-110" 
@@ -126,8 +126,8 @@ const Dashboard: React.FC<DashboardProps> = ({ platforms, onPlatformsChange }) =
         {platforms.length === 0 && (
           <div className="text-center py-12">
             <div className="text-gray-500">
-              <p className="text-lg font-medium">暂无平台数据</p>
-              <p className="text-sm mt-2">请检查网络连接或稍后重试</p>
+              <p className="text-lg font-medium">No platform data available</p>
+              <p className="text-sm mt-2">Please check your network connection or try again later</p>
             </div>
           </div>
         )}

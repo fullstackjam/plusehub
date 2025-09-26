@@ -32,14 +32,14 @@ export class ApiService {
   }
 
   static generateHotValue(originalHot: any, rank: number): number {
-    // 如果原始热度值存在且大于0，使用原始值
+    // If original hot value exists and is greater than 0, use the original value
     if (originalHot && originalHot > 0) {
       return originalHot;
     }
     
-    // 否则根据排名生成热度值（排名越靠前热度越高）
+    // Otherwise generate hot value based on rank (higher rank = higher hot value)
     const baseHot = 100000;
-    const rankMultiplier = Math.max(1, 50 - rank); // 排名1-50对应50-1的倍数
+    const rankMultiplier = Math.max(1, 50 - rank); // Rank 1-50 corresponds to multiplier 50-1
     return baseHot * rankMultiplier;
   }
 
@@ -128,18 +128,18 @@ export class ApiService {
   }
 
   static async get36krHot(): Promise<PlatformResponse> {
-    // 使用模拟数据，因为60s API没有36氪端点
+    // Use mock data since 60s API doesn't have 36Kr endpoint
     const mockTopics = [
-      { title: "小米17系列发布，起售价4499元", hot: 120000 },
-      { title: "雷军年度演讲：小米的过去、现在和未来", hot: 98000 },
-      { title: "AI大模型在医疗领域的应用突破", hot: 85000 },
-      { title: "新能源汽车销量再创新高", hot: 76000 },
-      { title: "5G技术推动智慧城市建设", hot: 68000 },
-      { title: "区块链技术在金融领域的创新应用", hot: 59000 },
-      { title: "人工智能助力制造业转型升级", hot: 52000 },
-      { title: "云计算市场持续增长", hot: 48000 },
-      { title: "物联网设备连接数突破百亿", hot: 42000 },
-      { title: "量子计算技术取得重要进展", hot: 38000 }
+      { title: "Xiaomi 17 Series Released, Starting Price 4499 Yuan", hot: 120000 },
+      { title: "Lei Jun Annual Speech: Xiaomi's Past, Present and Future", hot: 98000 },
+      { title: "AI Large Model Breakthrough in Medical Field", hot: 85000 },
+      { title: "New Energy Vehicle Sales Hit New High", hot: 76000 },
+      { title: "5G Technology Drives Smart City Construction", hot: 68000 },
+      { title: "Blockchain Technology Innovation in Financial Field", hot: 59000 },
+      { title: "AI Helps Manufacturing Industry Transformation", hot: 52000 },
+      { title: "Cloud Computing Market Continues to Grow", hot: 48000 },
+      { title: "IoT Device Connections Exceed 10 Billion", hot: 42000 },
+      { title: "Quantum Computing Technology Makes Important Progress", hot: 38000 }
     ];
 
     return {
@@ -155,18 +155,18 @@ export class ApiService {
   }
 
   static async getHuxiuHot(): Promise<PlatformResponse> {
-    // 使用模拟数据
+    // Use mock data
     const mockTopics = [
-      { title: "深度解析：为什么小米17能成为爆款", hot: 150000 },
-      { title: "科技巨头们的AI布局策略分析", hot: 120000 },
-      { title: "新能源汽车产业链投资机会", hot: 98000 },
-      { title: "5G时代下的商业模式创新", hot: 85000 },
-      { title: "人工智能在医疗健康领域的应用前景", hot: 76000 },
-      { title: "区块链技术如何重塑金融行业", hot: 68000 },
-      { title: "云计算服务商竞争格局分析", hot: 59000 },
-      { title: "物联网安全挑战与解决方案", hot: 52000 },
-      { title: "量子计算商业化进程加速", hot: 48000 },
-      { title: "边缘计算技术发展趋势", hot: 42000 }
+      { title: "In-depth Analysis: Why Xiaomi 17 Became a Hit", hot: 150000 },
+      { title: "Analysis of Tech Giants' AI Strategy Layout", hot: 120000 },
+      { title: "Investment Opportunities in New Energy Vehicle Industry Chain", hot: 98000 },
+      { title: "Business Model Innovation in the 5G Era", hot: 85000 },
+      { title: "AI Application Prospects in Medical Health Field", hot: 76000 },
+      { title: "How Blockchain Technology Reshapes Financial Industry", hot: 68000 },
+      { title: "Cloud Computing Service Provider Competition Analysis", hot: 59000 },
+      { title: "IoT Security Challenges and Solutions", hot: 52000 },
+      { title: "Quantum Computing Commercialization Process Accelerates", hot: 48000 },
+      { title: "Edge Computing Technology Development Trends", hot: 42000 }
     ];
 
     return {
@@ -182,18 +182,18 @@ export class ApiService {
   }
 
   static async getDoubanHot(): Promise<PlatformResponse> {
-    // 使用模拟数据
+    // Use mock data
     const mockTopics = [
-      { title: "《热辣滚烫》票房突破30亿", hot: 180000 },
-      { title: "《繁花》电视剧引发热议", hot: 150000 },
-      { title: "《流浪地球3》预告片发布", hot: 120000 },
-      { title: "《封神第二部》定档春节", hot: 98000 },
-      { title: "《长安三万里》动画电影", hot: 85000 },
-      { title: "《消失的她》悬疑片", hot: 76000 },
-      { title: "《满江红》古装片", hot: 68000 },
-      { title: "《深海》动画电影", hot: 59000 },
-      { title: "《中国乒乓》体育片", hot: 52000 },
-      { title: "《无名》谍战片", hot: 48000 }
+      { title: "'YOLO' Box Office Breaks 3 Billion", hot: 180000 },
+      { title: "'Blossoms Shanghai' TV Series Sparks Discussion", hot: 150000 },
+      { title: "'The Wandering Earth 3' Trailer Released", hot: 120000 },
+      { title: "'Creation of the Gods II' Scheduled for Spring Festival", hot: 98000 },
+      { title: "'Chang'an 30,000 Miles' Animated Movie", hot: 85000 },
+      { title: "'Lost in the Stars' Suspense Film", hot: 76000 },
+      { title: "'Full River Red' Period Drama", hot: 68000 },
+      { title: "'Deep Sea' Animated Movie", hot: 59000 },
+      { title: "'Ping Pong of China' Sports Film", hot: 52000 },
+      { title: "'Hidden Blade' Spy Film", hot: 48000 }
     ];
 
     return {
@@ -209,18 +209,18 @@ export class ApiService {
   }
 
   static async getHupuHot(): Promise<PlatformResponse> {
-    // 使用模拟数据
+    // Use mock data
     const mockTopics = [
-      { title: "NBA总决赛激战正酣", hot: 200000 },
-      { title: "世界杯预选赛中国队表现", hot: 180000 },
-      { title: "CBA新赛季看点分析", hot: 150000 },
-      { title: "欧冠淘汰赛精彩对决", hot: 120000 },
-      { title: "中超联赛积分榜变化", hot: 98000 },
-      { title: "网球大满贯赛事回顾", hot: 85000 },
-      { title: "电竞世界赛精彩瞬间", hot: 76000 },
-      { title: "奥运会备战情况更新", hot: 68000 },
-      { title: "F1赛车赛季总结", hot: 59000 },
-      { title: "高尔夫大师赛精彩集锦", hot: 52000 }
+      { title: "NBA Finals Battle Intensifies", hot: 200000 },
+      { title: "China Team Performance in World Cup Qualifiers", hot: 180000 },
+      { title: "CBA New Season Highlights Analysis", hot: 150000 },
+      { title: "Champions League Knockout Exciting Matchups", hot: 120000 },
+      { title: "Chinese Super League Standings Changes", hot: 98000 },
+      { title: "Tennis Grand Slam Tournament Review", hot: 85000 },
+      { title: "Esports World Championship Highlights", hot: 76000 },
+      { title: "Olympic Games Preparation Updates", hot: 68000 },
+      { title: "F1 Racing Season Summary", hot: 59000 },
+      { title: "Golf Masters Tournament Highlights", hot: 52000 }
     ];
 
     return {

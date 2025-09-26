@@ -24,7 +24,7 @@ const PlatformCard: React.FC<PlatformCardProps> = ({
   const [isRefreshing, setIsRefreshing] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
 
-  // 为每个平台定义独特的背景色和样式
+  // Define unique background colors and styles for each platform
   const getCardBackground = (platform: string) => {
     const backgrounds = {
       'weibo': 'bg-gradient-to-br from-orange-50 via-orange-100 to-red-50',
@@ -42,7 +42,7 @@ const PlatformCard: React.FC<PlatformCardProps> = ({
     return backgrounds[platform as keyof typeof backgrounds] || 'bg-gradient-to-br from-slate-50 via-gray-100 to-slate-50';
   };
 
-  // 为每个平台定义独特的装饰图案
+  // Define unique decorative patterns for each platform
   const getCardPattern = (platform: string) => {
     const patterns = {
       'weibo': 'before:content-["🔥"] before:absolute before:top-4 before:right-4 before:text-2xl before:opacity-20 before:pointer-events-none',
@@ -99,7 +99,7 @@ const PlatformCard: React.FC<PlatformCardProps> = ({
     onDrop?.(e, platform);
   };
 
-  // 获取要显示的热点列表
+  // Get the hot topics list to display
   const getDisplayTopics = () => {
     if (!data || !data.topics) return [];
     return showAll ? data.topics : data.topics.slice(0, 10);
@@ -135,26 +135,26 @@ const PlatformCard: React.FC<PlatformCardProps> = ({
                 {displayName}
               </h3>
               <p className="text-sm text-slate-500 mt-1">
-                {data ? `${data.topics.length}条热点` : '加载中...'}
+                {data ? `${data.topics.length} hot topics` : 'Loading...'}
               </p>
             </div>
           </div>
           
           <div className="flex items-center space-x-2">
-            {/* 拖拽手柄 */}
+            {/* Drag handle */}
             <div className="drag-handle">
               <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M7 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM7 8a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM7 14a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM13 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM13 8a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM13 14a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/>
               </svg>
             </div>
             
-            {/* 刷新按钮 */}
+            {/* Refresh button */}
             {onRefresh && (
               <button
                 onClick={handleRefresh}
                 disabled={isRefreshing || loading}
                 className="card-refresh-btn"
-                title="刷新数据"
+                title="Refresh Data"
               >
                 <svg 
                   className={`w-4 h-4 ${isRefreshing ? 'animate-spin' : ''}`} 
@@ -185,7 +185,7 @@ const PlatformCard: React.FC<PlatformCardProps> = ({
         {error && (
           <div className="px-6 py-12 text-center">
             <div className="text-red-500 text-sm">
-              <p className="font-medium">加载失败</p>
+              <p className="font-medium">Loading Failed</p>
               <p className="text-xs mt-1">{error}</p>
             </div>
           </div>
@@ -212,7 +212,7 @@ const PlatformCard: React.FC<PlatformCardProps> = ({
                     <div className="flex items-center space-x-2 flex-shrink-0 ml-3">
                       {topic.platforms && topic.platforms.length > 1 && (
                         <span className="platform-badge">
-                          {topic.platforms.length}平台
+                          {topic.platforms.length} platforms
                         </span>
                       )}
                       {topic.hot && (
@@ -226,7 +226,7 @@ const PlatformCard: React.FC<PlatformCardProps> = ({
               ))}
             </div>
             
-            {/* 查看更多按钮 */}
+            {/* Show more button */}
             {hasMoreTopics && (
               <div className="px-6 py-4 border-t border-slate-100/50 bg-gradient-to-r from-slate-50/50 to-white/50">
                 <button
@@ -234,7 +234,7 @@ const PlatformCard: React.FC<PlatformCardProps> = ({
                   className="w-full flex items-center justify-center space-x-2 text-sm font-medium text-slate-600 hover:text-blue-600 hover:bg-blue-50/50 px-4 py-3 rounded-xl transition-all duration-300 ease-out hover:scale-[1.02] hover:shadow-md"
                 >
                   <span>
-                    {showAll ? '收起' : `查看更多`}
+                    {showAll ? 'Collapse' : `Show More`}
                   </span>
                   {!showAll && (
                     <span className="text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full font-medium">
@@ -257,7 +257,7 @@ const PlatformCard: React.FC<PlatformCardProps> = ({
         
         {data && data.topics && data.topics.length === 0 && (
           <div className="px-6 py-12 text-center text-gray-500">
-            <p>暂无热点数据</p>
+            <p>No hot topic data available</p>
           </div>
         )}
       </div>

@@ -1,7 +1,7 @@
 {
   "name": "pulsehub",
   "version": "1.0.0",
-  "description": "PulseHub - 聚合各大社交媒体平台实时热点榜单的Web应用",
+  "description": "PulseHub - Web application that aggregates real-time hot topics from major social media platforms",
   "private": true,
   "scripts": {
     "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
