@@ -27,7 +27,7 @@ const PlatformCard: React.FC<PlatformCardProps> = ({
 
   return (
     <div
-      className="platform-card group relative bg-white/90 backdrop-blur-sm rounded-xl sm:rounded-2xl shadow-xl border border-white/20 p-4 sm:p-5 lg:p-6 hover:shadow-2xl hover:scale-105 transition-all duration-500 cursor-move"
+      className="platform-card group relative bg-white/90 backdrop-blur-sm rounded-xl sm:rounded-2xl shadow-xl border border-white/20 p-5 sm:p-6 lg:p-8 hover:shadow-2xl hover:scale-105 transition-all duration-500 cursor-move"
       draggable
       onDragStart={(e) => onDragStart(e, platform)}
       onDragEnd={onDragEnd}
@@ -36,17 +36,17 @@ const PlatformCard: React.FC<PlatformCardProps> = ({
       style={{ borderTopColor: color, borderTopWidth: '4px' }}
     >
       {/* Header */}
-      <div className="flex items-center justify-between mb-3 sm:mb-4">
-        <div className="flex items-center space-x-2 sm:space-x-3 min-w-0 flex-1">
+      <div className="flex items-center justify-between mb-4 sm:mb-5">
+        <div className="flex items-center space-x-3 sm:space-x-4 min-w-0 flex-1">
           <div 
-            className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl flex items-center justify-center text-white font-bold text-sm sm:text-lg shadow-lg flex-shrink-0"
+            className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center text-white font-bold text-base sm:text-lg shadow-lg flex-shrink-0"
             style={{ backgroundColor: color }}
           >
             {icon}
           </div>
           <div className="min-w-0 flex-1">
-            <h3 className="font-bold text-slate-800 text-sm sm:text-base lg:text-lg truncate">{displayName}</h3>
-            <p className="text-slate-500 text-xs sm:text-sm">
+            <h3 className="font-bold text-slate-800 text-base sm:text-lg lg:text-xl truncate">{displayName}</h3>
+            <p className="text-slate-500 text-sm sm:text-base">
               {data ? `${data.topics.length} topics` : 'No data'}
             </p>
           </div>
@@ -75,7 +75,7 @@ const PlatformCard: React.FC<PlatformCardProps> = ({
       </div>
 
       {/* Content */}
-      <div className="min-h-[160px] sm:min-h-[180px] lg:min-h-[200px]">
+      <div className="min-h-[200px] sm:min-h-[240px] lg:min-h-[280px]">
         {loading && (
           <div className="flex items-center justify-center h-32 sm:h-40 lg:h-48">
             <div className="loading-spinner"></div>
@@ -95,52 +95,54 @@ const PlatformCard: React.FC<PlatformCardProps> = ({
         )}
         
         {data && !loading && !error && (
-          <div className="space-y-2 sm:space-y-3">
-            {data.topics.slice(0, 5).map((topic, index) => (
+          <div className="space-y-1.5">
+            {data.topics.slice(0, 8).map((topic, index) => (
               <a
                 key={index}
                 href={topic.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block p-2 sm:p-3 rounded-lg bg-slate-50 hover:bg-slate-100 transition-colors duration-200 group/link"
+                className="block p-2.5 rounded-md bg-slate-50 hover:bg-slate-100 transition-colors duration-200 group/link"
               >
-                <div className="flex items-start justify-between">
-                  <div className="flex-1 min-w-0">
-                    <p className="text-slate-800 font-medium text-xs sm:text-sm leading-relaxed group-hover/link:text-blue-600 transition-colors duration-200 line-clamp-2">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-3 flex-1 min-w-0">
+                    <span className="text-slate-400 text-sm font-mono flex-shrink-0 w-6 text-center">
+                      {topic.rank}
+                    </span>
+                    <p className="text-slate-800 font-medium text-sm leading-snug group-hover/link:text-blue-600 transition-colors duration-200 line-clamp-1 flex-1">
                       {topic.title}
                     </p>
+                  </div>
+                  <div className="flex items-center space-x-2 ml-3 flex-shrink-0">
+                    {topic.hot && topic.hot > 0 && (
+                      <span className="text-xs text-red-500 font-medium bg-red-50 px-2 py-1 rounded-full">
+                        {topic.hot > 10000 ? `${(topic.hot / 10000).toFixed(1)}w` : topic.hot}
+                      </span>
+                    )}
                     {topic.platforms && topic.platforms.length > 1 && (
-                      <div className="flex items-center mt-1 sm:mt-2 space-x-1">
-                        {topic.platforms.slice(0, 3).map((platform, idx) => (
+                      <div className="flex items-center space-x-1">
+                        {topic.platforms.slice(0, 2).map((platform, idx) => (
                           <span
                             key={idx}
-                            className="px-1.5 py-0.5 sm:px-2 sm:py-1 bg-blue-100 text-blue-600 text-xs rounded-full"
+                            className="px-1.5 py-0.5 bg-blue-100 text-blue-600 text-xs rounded-full"
                           >
                             {platform}
                           </span>
                         ))}
-                        {topic.platforms.length > 3 && (
-                          <span className="text-slate-500 text-xs">+{topic.platforms.length - 3}</span>
+                        {topic.platforms.length > 2 && (
+                          <span className="text-slate-500 text-xs">+{topic.platforms.length - 2}</span>
                         )}
                       </div>
-                    )}
-                  </div>
-                  <div className="flex flex-col items-end ml-2 sm:ml-3 flex-shrink-0">
-                    <span className="text-xs text-slate-500">#{topic.rank}</span>
-                    {topic.hot && topic.hot > 0 && (
-                      <span className="text-xs text-red-500 font-medium">
-                        {topic.hot > 10000 ? `${(topic.hot / 10000).toFixed(1)}w` : topic.hot}
-                      </span>
                     )}
                   </div>
                 </div>
               </a>
             ))}
             
-            {data.topics.length > 5 && (
-              <div className="text-center pt-1 sm:pt-2">
-                <span className="text-slate-500 text-xs sm:text-sm">
-                  +{data.topics.length - 5} more topics
+            {data.topics.length > 8 && (
+              <div className="text-center pt-2">
+                <span className="text-slate-500 text-sm">
+                  +{data.topics.length - 8} more topics
                 </span>
               </div>
             )}
