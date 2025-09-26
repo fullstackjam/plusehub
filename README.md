@@ -9,7 +9,8 @@ PulseHub is a modern social media hot topics aggregation platform that collects 
 - 🖱️ **Drag & Drop Sorting** - Support card drag and drop reordering
 - 🔄 **Independent Refresh** - Each platform can refresh data independently
 - 📱 **Responsive Design** - Perfect adaptation to various devices
-- 🚀 **One-click Deployment** - Support Docker and Kubernetes deployment
+- 🚀 **Pure Frontend** - No backend required, direct API calls from user's browser
+- ⚡ **Fast Loading** - Direct data fetching for optimal performance
 
 ## 🏗️ Tech Stack
 
@@ -19,26 +20,16 @@ PulseHub is a modern social media hot topics aggregation platform that collects 
 - **Vite** - Fast build tool
 - **Tailwind CSS** - Atomic CSS framework
 
-### Backend
-- **Node.js** - Runtime environment
-- **Express** - Web framework
-- **TypeScript** - Type safety
-- **Axios** - HTTP client
-
-### Deployment
-- **Docker** - Containerization
-- **Kubernetes** - Container orchestration
-- **Helm** - Package management
-- **Nginx Ingress** - Load balancing
+### Data Sources
+- **60s API** - Real-time hot topics from multiple platforms
+- **Direct API Calls** - No proxy, using user's IP for requests
 
 ## 🚀 Quick Start
 
 ### Requirements
 
 - Node.js 18+
-- Docker 20+
-- Kubernetes 1.20+
-- Helm 3.0+
+- npm or yarn
 
 ### Local Development
 
@@ -50,47 +41,53 @@ cd pulsehub
 
 2. **Install dependencies**
 ```bash
-# Install root dependencies
+# Install dependencies
 npm install
 
 # Install frontend dependencies
 cd frontend && npm install
-
-# Install backend dependencies
-cd ../backend && npm install
 ```
 
-3. **Start development servers**
+3. **Start development server**
 ```bash
-# Start backend (port 3001)
-cd backend && npm run dev
-
-# Start frontend (port 5173)
-cd frontend && npm run dev
+# Start frontend development server
+npm run dev
 ```
 
 4. **Access the application**
-- Frontend: http://localhost:5173
-- Backend API: http://localhost:3001/api
+- Application: http://localhost:3000
 
 ### Docker Deployment
 
-1. **Build image**
+1. **Build Docker image**
 ```bash
-docker build -t pulsehub .
+npm run docker:build
 ```
 
-2. **Run container**
+2. **Run Docker container**
 ```bash
 # Run in foreground
-docker run -p 3001:3001 pulsehub
+npm run docker:run
 
 # Run in background
-docker run -d -p 3001:3001 --name pulsehub pulsehub
+docker run -d -p 80:80 --name pulsehub pulsehub
 ```
 
 3. **Access the application**
-- Application URL: http://localhost:3001
+- Application URL: http://localhost
+
+### Static Deployment
+
+1. **Build for production**
+```bash
+npm run build
+```
+
+2. **Deploy to any static hosting service**
+- **Vercel**: `vercel --prod`
+- **Netlify**: Drag and drop the `dist` folder
+- **GitHub Pages**: Push the built files to gh-pages branch
+- **Any web server**: Serve the `dist` folder
 
 ### Kubernetes Deployment
 
@@ -113,53 +110,68 @@ kubectl get pods -n pulsehub
 
 ```
 PulseHub/
-├── frontend/                 # Frontend React application
-│   ├── src/
-│   │   ├── components/      # React components
-│   │   ├── services/        # API services
-│   │   ├── types/          # TypeScript type definitions
-│   │   └── App.tsx         # Main application component
-│   ├── public/             # Static assets
-│   └── package.json
-├── backend/                 # Backend Node.js application
-│   ├── src/
-│   │   ├── services/       # Business logic services
-│   │   ├── routes/         # API routes
-│   │   └── index.ts        # Application entry point
-│   └── package.json
-├── helm/                   # Helm Charts
-│   └── pulsehub/
-│       ├── templates/      # Kubernetes templates
-│       ├── Chart.yaml      # Chart metadata
-│       └── values.yaml     # Configuration values
-├── .github/                # GitHub Actions
-│   └── workflows/
+├── src/                     # Source code
+│   ├── components/          # React components
+│   │   ├── Dashboard.tsx    # Main dashboard component
+│   │   └── PlatformCard.tsx # Platform card component
+│   ├── services/           # API services
+│   │   └── api.ts          # Direct API calls to external services
+│   ├── types/              # TypeScript type definitions
+│   │   └── index.ts        # Type definitions
+│   ├── App.tsx             # Main application component
+│   ├── main.tsx            # Application entry point
+│   └── index.css           # Global styles
+├── dist/                   # Built files for production
+├── public/                 # Static assets
+├── package.json            # Dependencies and scripts
+├── vite.config.ts          # Vite configuration
+├── tailwind.config.js      # Tailwind CSS configuration
+├── tsconfig.json           # TypeScript configuration
 ├── Dockerfile              # Docker build file
-└── package.json           # Root dependencies
+├── .dockerignore           # Docker ignore file
+└── helm/                   # Helm Charts
+    └── pulsehub/
+        ├── templates/      # Kubernetes templates
+        ├── Chart.yaml      # Chart metadata
+        └── values.yaml     # Configuration values
 ```
 
 ## 🔧 Configuration
 
-### Environment Variables
+### Vite Configuration
 
-| Variable | Default Value | Description |
-|----------|---------------|-------------|
-| `PORT` | `3001` | Backend service port |
-| `NODE_ENV` | `development` | Runtime environment |
+Main configuration in `vite.config.ts`:
 
-### Helm Configuration
+```typescript
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
 
-Main configuration items in `helm/pulsehub/values.yaml`:
+export default defineConfig({
+  plugins: [react()],
+  server: {
+    port: 3000,
+    host: true
+  }
+})
+```
 
-```yaml
-replicaCount: 1                    # Number of replicas
-image:
-  repository: fullstackjam/pulsehub # Image repository
-  tag: latest                      # Image tag
-ingress:
-  enabled: true                    # Enable Ingress
-  hosts:
-    - host: pulsehub.fullstackjam.com # Domain name
+### Tailwind CSS Configuration
+
+Main configuration in `tailwind.config.js`:
+
+```javascript
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {
+      // Custom theme extensions
+    },
+  },
+  plugins: [],
+}
 ```
 
 ## 📊 Supported Data Sources
@@ -179,18 +191,28 @@ ingress:
 
 ### Adding New Data Sources
 
-1. **Backend API Service**
+1. **Update API Service**
 ```typescript
-// backend/src/services/api.ts
-static async getNewPlatformHot(): Promise<HotTopic[]> {
-  // Implement data fetching logic
-  return topics;
+// src/services/api.ts
+static async fetchPlatformData(platform: string): Promise<PlatformResponse> {
+  const endpointMap: Record<string, string> = {
+    // ... existing endpoints
+    newplatform: '/v2/newplatform',  // Add new endpoint
+  };
+  
+  const endpoint = endpointMap[platform];
+  if (!endpoint) {
+    return this.getMockData(platform);
+  }
+  
+  const data = await this.fetchFrom60sAPI(endpoint);
+  return this.transformData(platform, data);
 }
 ```
 
-2. **Frontend Configuration**
+2. **Update Platform Configuration**
 ```typescript
-// frontend/src/App.tsx
+// src/App.tsx
 const PLATFORM_CONFIG = [
   // ... existing configuration
   {
@@ -204,7 +226,7 @@ const PLATFORM_CONFIG = [
 
 ### Custom Styling
 
-The project uses Tailwind CSS, you can customize styles by modifying `frontend/src/index.css`:
+The project uses Tailwind CSS, you can customize styles by modifying `src/index.css`:
 
 ```css
 /* Custom card styles */
@@ -214,15 +236,24 @@ The project uses Tailwind CSS, you can customize styles by modifying `frontend/s
 }
 ```
 
-## 🚀 CI/CD
+## 🚀 Deployment Options
 
-The project uses GitHub Actions for continuous integration and deployment:
+### Static Hosting Services
 
-- **CI Pipeline** - Code checking, type checking, build testing
-- **Docker Build** - Automatic build and push to Docker Hub
-- **Kubernetes Deployment** - Automatic deployment to K8s cluster
+- **Vercel** - One-click deployment from GitHub
+- **Netlify** - Drag and drop deployment or Git integration
+- **GitHub Pages** - Free hosting for public repositories
+- **Cloudflare Pages** - Fast global CDN
+- **Firebase Hosting** - Google's hosting platform
 
 ## 📝 Changelog
+
+### v2.0.0 (2024-09-26)
+- 🚀 **Major Architecture Change** - Removed backend dependency
+- ⚡ **Direct API Calls** - Frontend directly requests external APIs using user's IP
+- 🎯 **Simplified Deployment** - Pure frontend application, deploy to any static hosting
+- 🔧 **Improved Performance** - No server proxy, faster data loading
+- 🛠️ **Easier Maintenance** - Single codebase, no backend to maintain
 
 ### v1.0.0 (2024-09-26)
 - ✨ Initial version release
@@ -230,7 +261,6 @@ The project uses GitHub Actions for continuous integration and deployment:
 - 🎨 Modern UI design
 - 🖱️ Drag and drop sorting functionality
 - 🔄 Independent refresh functionality
-- 🚀 Docker and Kubernetes deployment support
 
 ## 🤝 Contributing
 
