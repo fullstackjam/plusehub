@@ -3,14 +3,13 @@
 # Stage 1: Build the application
 FROM node:18-alpine AS builder
 
-# Set working directory
 WORKDIR /app
 
-# Copy package files
+# Copy package files first for better caching
 COPY package*.json ./
 
 # Install dependencies
-RUN npm install
+RUN npm ci --only=production --silent
 
 # Copy source code
 COPY . .
@@ -24,7 +23,7 @@ FROM nginx:alpine
 # Copy built files from builder stage
 COPY --from=builder /app/dist /usr/share/nginx/html
 
-# Create simple nginx config
+# Create nginx config
 RUN echo 'server { \
     listen 80; \
     server_name localhost; \
@@ -34,7 +33,6 @@ RUN echo 'server { \
         try_files $uri $uri/ /index.html; \
     } \
     location /health { \
-        access_log off; \
         return 200 "healthy\\n"; \
         add_header Content-Type text/plain; \
     } \
