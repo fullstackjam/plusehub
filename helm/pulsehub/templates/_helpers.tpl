@@ -44,7 +44,15 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 Selector labels
 */}}
 {{- define "pulsehub.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "pulsehub.name" . }}
-app.kubernetes.io/instance: {{ .Release.Name }}
+app.kubernetes.io/name: {{ .Values.app.name }}
+app.kubernetes.io/instance: {{ .Values.app.name }}
+{{- end }}
+
+{{/*
+Common labels
+*/}}
+{{- define "pulsehub.commonLabels" -}}
+app.kubernetes.io/name: {{ .Values.app.name }}
+app.kubernetes.io/instance: {{ .Values.app.name }}
 {{- end }}
 

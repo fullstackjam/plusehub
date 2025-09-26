@@ -1,10 +1,18 @@
-# Minimal values for pulsehub
+# Template values for your application
+# Copy this chart and modify these values for your project
+
+# Application configuration
+app:
+  name: pulsehub                    # Change this to your app name (also used as namespace)
+
+# Deployment configuration
 replicaCount: 1
 
+# Container image
 image:
-  repository: fullstackjam/pulsehub
-  tag: latest
+  repository: fullstackjam/pulsehub  # Change this to your image repository
+  tag: latest                        # Change this to your image tag
 
+# Ingress configuration
 ingress:
-  enabled: true
-  host: pulsehub.fullstackjam.com
+  host: pulsehub.fullstackjam.com   # Change this to your domain

@@ -1,10 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "pulsehub.fullname" . }}
-  namespace: {{ .Release.Namespace }}
+  name: {{ .Values.app.name }}
   labels:
-    {{- include "pulsehub.labels" . | nindent 4 }}
+    {{- include "pulsehub.commonLabels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
@@ -13,10 +12,10 @@ spec:
   template:
     metadata:
       labels:
-        {{- include "pulsehub.selectorLabels" . | nindent 8 }}
+        {{- include "pulsehub.commonLabels" . | nindent 8 }}
     spec:
       containers:
-        - name: pulsehub
+        - name: {{ .Values.app.name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           ports:
             - containerPort: 80

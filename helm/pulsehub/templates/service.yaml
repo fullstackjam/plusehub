@@ -1,10 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "pulsehub.fullname" . }}
-  namespace: {{ .Release.Namespace }}
+  name: {{ .Values.app.name }}
   labels:
-    {{- include "pulsehub.labels" . | nindent 4 }}
+    {{- include "pulsehub.commonLabels" . | nindent 4 }}
 spec:
   type: ClusterIP
   ports:
