@@ -41,24 +41,6 @@ const PLATFORM_CONFIG = [
     color: '#ff6600'
   },
   {
-    platform: 'huxiu',
-    displayName: 'Huxiu Hot Articles',
-    icon: 'H',
-    color: '#ff6b35'
-  },
-  {
-    platform: 'douban',
-    displayName: 'Douban Hot Movies',
-    icon: 'D',
-    color: '#007722'
-  },
-  {
-    platform: 'hupu',
-    displayName: 'Hupu Hot Posts',
-    icon: 'H',
-    color: '#ff6b35'
-  },
-  {
     platform: 'aggregated',
     displayName: 'Aggregated Hot Topics',
     icon: '🔥',

@@ -37,8 +37,7 @@ export class ApiService {
 
     const endpoint = endpointMap[platform];
     if (!endpoint) {
-      // For platforms not supported by 60s API, return mock data
-      return this.getMockData(platform);
+      throw new Error(`Platform ${platform} is not supported by the API`);
     }
 
     const data = await this.fetchFrom60sAPI(endpoint);
@@ -81,82 +80,9 @@ export class ApiService {
     };
   }
 
-  private static getMockData(platform: string): PlatformResponse {
-    const mockDataMap: Record<string, any[]> = {
-      '36kr': [
-        { title: "Xiaomi 17 Series Released, Starting Price 4499 Yuan", hot: 120000 },
-        { title: "Lei Jun Annual Speech: Xiaomi's Past, Present and Future", hot: 98000 },
-        { title: "AI Large Model Breakthrough in Medical Field", hot: 85000 },
-        { title: "New Energy Vehicle Sales Hit New High", hot: 76000 },
-        { title: "5G Technology Drives Smart City Construction", hot: 68000 },
-        { title: "Blockchain Technology Innovation in Financial Field", hot: 59000 },
-        { title: "AI Helps Manufacturing Industry Transformation", hot: 52000 },
-        { title: "Cloud Computing Market Continues to Grow", hot: 48000 },
-        { title: "IoT Device Connections Exceed 10 Billion", hot: 42000 },
-        { title: "Quantum Computing Technology Makes Important Progress", hot: 38000 }
-      ],
-      'huxiu': [
-        { title: "In-depth Analysis: Why Xiaomi 17 Became a Hit", hot: 150000 },
-        { title: "Analysis of Tech Giants' AI Strategy Layout", hot: 120000 },
-        { title: "Investment Opportunities in New Energy Vehicle Industry Chain", hot: 98000 },
-        { title: "Business Model Innovation in the 5G Era", hot: 85000 },
-        { title: "AI Application Prospects in Medical Health Field", hot: 76000 },
-        { title: "How Blockchain Technology Reshapes Financial Industry", hot: 68000 },
-        { title: "Cloud Computing Service Provider Competition Analysis", hot: 59000 },
-        { title: "IoT Security Challenges and Solutions", hot: 52000 },
-        { title: "Quantum Computing Commercialization Process Accelerates", hot: 48000 },
-        { title: "Edge Computing Technology Development Trends", hot: 42000 }
-      ],
-      'douban': [
-        { title: "'YOLO' Box Office Breaks 3 Billion", hot: 180000 },
-        { title: "'Blossoms Shanghai' TV Series Sparks Discussion", hot: 150000 },
-        { title: "'The Wandering Earth 3' Trailer Released", hot: 120000 },
-        { title: "'Creation of the Gods II' Scheduled for Spring Festival", hot: 98000 },
-        { title: "'Chang'an 30,000 Miles' Animated Movie", hot: 85000 },
-        { title: "'Lost in the Stars' Suspense Film", hot: 76000 },
-        { title: "'Full River Red' Period Drama", hot: 68000 },
-        { title: "'Deep Sea' Animated Movie", hot: 59000 },
-        { title: "'Ping Pong of China' Sports Film", hot: 52000 },
-        { title: "'Hidden Blade' Spy Film", hot: 48000 }
-      ],
-      'hupu': [
-        { title: "NBA Finals Battle Intensifies", hot: 200000 },
-        { title: "China Team Performance in World Cup Qualifiers", hot: 180000 },
-        { title: "CBA New Season Highlights Analysis", hot: 150000 },
-        { title: "Champions League Knockout Exciting Matchups", hot: 120000 },
-        { title: "Chinese Super League Standings Changes", hot: 98000 },
-        { title: "Tennis Grand Slam Tournament Review", hot: 85000 },
-        { title: "Esports World Championship Highlights", hot: 76000 },
-        { title: "Olympic Games Preparation Updates", hot: 68000 },
-        { title: "F1 Racing Season Summary", hot: 59000 },
-        { title: "Golf Masters Tournament Highlights", hot: 52000 }
-      ]
-    };
-
-    const mockTopics = mockDataMap[platform] || [];
-    const urlTemplates: Record<string, string> = {
-      '36kr': 'https://36kr.com/search/articles/{query}',
-      'huxiu': 'https://www.huxiu.com/search?q={query}',
-      'douban': 'https://movie.douban.com/subject_search?search_text={query}',
-      'hupu': 'https://bbs.hupu.com/search?q={query}',
-    };
-
-    const urlTemplate = urlTemplates[platform] || 'https://www.baidu.com/s?wd={query}';
-
-    return {
-      platform,
-      topics: mockTopics.map((item, index) => ({
-        title: item.title,
-        url: urlTemplate.replace('{query}', encodeURIComponent(item.title)),
-        hot: this.generateHotValue(item.hot, index),
-        rank: index + 1
-      })),
-      timestamp: Date.now()
-    };
-  }
 
   static async fetchAllPlatforms(): Promise<Record<string, PlatformResponse>> {
-    const platforms = ['weibo', 'douyin', 'bilibili', 'zhihu', 'baidu', 'toutiao', '36kr', 'huxiu', 'douban', 'hupu'];
+    const platforms = ['weibo', 'douyin', 'bilibili', 'zhihu', 'baidu', 'toutiao'];
     
     const promises = platforms.map(async (platform) => {
       try {
@@ -164,8 +90,7 @@ export class ApiService {
         return { platform, data };
       } catch (error) {
         console.error(`Error fetching ${platform}:`, error);
-        // Return mock data as fallback
-        return { platform, data: this.getMockData(platform) };
+        return { platform, data: null };
       }
     });
 
