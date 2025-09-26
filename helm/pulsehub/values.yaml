@@ -1,7 +1,7 @@
 replicaCount: 1
 
 image:
-  repository: fullstackjam/plusehub
+  repository: fullstackjam/pulsehub
   pullPolicy: Always
   tag: latest
 
@@ -18,14 +18,14 @@ ingress:
     external-dns.alpha.kubernetes.io/target: homelab-tunnel.fullstackjam.com
     external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
   hosts:
-    - host: plusehub.fullstackjam.com
+    - host: pulsehub.fullstackjam.com
       paths:
         - path: /
           pathType: Prefix
   tls:
-    - secretName: plusehub-tls-certificate
+    - secretName: pulsehub-tls-certificate
       hosts:
-        - plusehub.fullstackjam.com
+        - pulsehub.fullstackjam.com
 
 resources:
   limits:

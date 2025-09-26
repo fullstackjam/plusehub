@@ -8,7 +8,7 @@ This is a Helm Chart for deploying the PulseHub application.
 
 ```bash
 helm install pulsehub ./helm/pulsehub \
-  --namespace plusehub \
+  --namespace pulsehub \
   --create-namespace
 ```
 
@@ -20,17 +20,17 @@ Create an Application in ArgoCD pointing to this repository:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: plusehub
+  name: pulsehub
   namespace: argocd
 spec:
   project: default
   source:
-    repoURL: https://github.com/fullstackjam/plusehub
+    repoURL: https://github.com/fullstackjam/pulsehub
     targetRevision: master
     path: helm/pulsehub
   destination:
     server: https://kubernetes.default.svc
-    namespace: plusehub
+    namespace: pulsehub
   syncPolicy:
     automated:
       prune: true

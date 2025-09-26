@@ -44,8 +44,8 @@ PulseHub is a modern social media hot topics aggregation platform that collects 
 
 1. **Clone the project**
 ```bash
-git clone https://github.com/fullstackjam/plusehub.git
-cd plusehub
+git clone https://github.com/fullstackjam/pulsehub.git
+cd pulsehub
 ```
 
 2. **Install dependencies**
@@ -97,17 +97,17 @@ docker run -d -p 3001:3001 --name pulsehub pulsehub
 1. **Deploy using Helm**
 ```bash
 # Create namespace
-kubectl create namespace plusehub
+kubectl create namespace pulsehub
 
 # Deploy application
-helm install plusehub ./helm/pulsehub -n plusehub
+helm install pulsehub ./helm/pulsehub -n pulsehub
 
 # Check deployment status
-kubectl get pods -n plusehub
+kubectl get pods -n pulsehub
 ```
 
 2. **Access the application**
-- Application URL: https://plusehub.fullstackjam.com
+- Application URL: https://pulsehub.fullstackjam.com
 
 ## 📁 Project Structure
 
@@ -154,12 +154,12 @@ Main configuration items in `helm/pulsehub/values.yaml`:
 ```yaml
 replicaCount: 1                    # Number of replicas
 image:
-  repository: fullstackjam/plusehub # Image repository
+  repository: fullstackjam/pulsehub # Image repository
   tag: latest                      # Image tag
 ingress:
   enabled: true                    # Enable Ingress
   hosts:
-    - host: plusehub.fullstackjam.com # Domain name
+    - host: pulsehub.fullstackjam.com # Domain name
 ```
 
 ## 📊 Supported Data Sources

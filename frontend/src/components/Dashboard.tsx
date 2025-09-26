@@ -86,7 +86,7 @@ const Dashboard: React.FC<DashboardProps> = ({ platforms, onPlatformsChange }) =
               
               {/* GitHub Link */}
               <a
-                href="https://github.com/fullstackjam/plusehub"
+                href="https://github.com/fullstackjam/pulsehub"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="github-link group"

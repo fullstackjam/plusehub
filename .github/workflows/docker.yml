@@ -28,5 +28,5 @@ jobs:
           file: Dockerfile
           push: true
           tags: |
-            fullstackjam/plusehub:${{ env.SHORT_SHA }}
-            fullstackjam/plusehub:latest
+            fullstackjam/pulsehub:${{ env.SHORT_SHA }}
+            fullstackjam/pulsehub:latest
