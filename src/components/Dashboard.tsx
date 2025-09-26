@@ -65,21 +65,21 @@ const Dashboard: React.FC<DashboardProps> = ({ platforms, onPlatformsChange }) =
     <div className="min-h-screen relative">
       {/* Header */}
       <header className="header-gradient">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-2xl">
-                <span className="text-white text-xl font-bold">P</span>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0">
+            <div className="flex items-center space-x-3 sm:space-x-4">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-2xl">
+                <span className="text-white text-lg sm:text-xl font-bold">P</span>
               </div>
               <div>
-                <h1 className="text-4xl font-bold text-white tracking-tight">PulseHub</h1>
-                <p className="mt-2 text-slate-300 text-lg">Real-time Hot Topics Aggregation Platform</p>
+                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight">PulseHub</h1>
+                <p className="mt-1 sm:mt-2 text-slate-300 text-sm sm:text-base lg:text-lg">Real-time Hot Topics Aggregation Platform</p>
               </div>
             </div>
-            <div className="flex items-center space-x-6">
-              <div className="text-right">
-                <div className="text-slate-300 text-sm mb-1">Last Updated</div>
-                <div className="text-white font-medium">
+            <div className="flex items-center justify-between lg:justify-end space-x-4 lg:space-x-6">
+              <div className="text-left lg:text-right">
+                <div className="text-slate-300 text-xs sm:text-sm mb-1">Last Updated</div>
+                <div className="text-white font-medium text-sm sm:text-base">
                   {new Date().toLocaleString()}
                 </div>
               </div>
@@ -89,11 +89,11 @@ const Dashboard: React.FC<DashboardProps> = ({ platforms, onPlatformsChange }) =
                 href="https://github.com/fullstackjam/pulsehub"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="github-link group"
+                className="github-link group flex-shrink-0"
                 title="View Source Code"
               >
                 <svg 
-                  className="w-8 h-8 text-white/80 group-hover:text-white transition-all duration-300 group-hover:scale-110" 
+                  className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 text-white/80 group-hover:text-white transition-all duration-300 group-hover:scale-110" 
                   fill="currentColor" 
                   viewBox="0 0 24 24"
                 >
@@ -106,9 +106,9 @@ const Dashboard: React.FC<DashboardProps> = ({ platforms, onPlatformsChange }) =
       </header>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
         {/* Grid Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-3 sm:gap-4 lg:gap-6">
           {platforms.map((platform) => (
             <PlatformCard 
               key={platform.platform} 
@@ -124,10 +124,10 @@ const Dashboard: React.FC<DashboardProps> = ({ platforms, onPlatformsChange }) =
         
         {/* Empty State */}
         {platforms.length === 0 && (
-          <div className="text-center py-12">
+          <div className="text-center py-8 sm:py-12">
             <div className="text-gray-500">
-              <p className="text-lg font-medium">No platform data available</p>
-              <p className="text-sm mt-2">Please check your network connection or try again later</p>
+              <p className="text-base sm:text-lg font-medium">No platform data available</p>
+              <p className="text-xs sm:text-sm mt-2">Please check your network connection or try again later</p>
             </div>
           </div>
         )}

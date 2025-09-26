@@ -138,14 +138,14 @@ function App() {
 
   if (loading && platforms.length === 0) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center">
-        <div className="text-center">
-          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center mx-auto mb-6 shadow-2xl">
-            <span className="text-white text-2xl font-bold">P</span>
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center px-4">
+        <div className="text-center max-w-md w-full">
+          <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center mx-auto mb-4 sm:mb-6 shadow-2xl">
+            <span className="text-white text-xl sm:text-2xl font-bold">P</span>
           </div>
           <div className="loading-spinner mx-auto mb-4"></div>
-          <p className="text-slate-600 text-lg font-medium">Loading hot topics data...</p>
-          <p className="text-slate-500 text-sm mt-2">Please wait, aggregating the latest hot topics for you</p>
+          <p className="text-slate-600 text-base sm:text-lg font-medium">Loading hot topics data...</p>
+          <p className="text-slate-500 text-xs sm:text-sm mt-2">Please wait, aggregating the latest hot topics for you</p>
         </div>
       </div>
     );
@@ -162,11 +162,11 @@ function App() {
       <button
         onClick={refreshData}
         disabled={loading}
-        className="refresh-button group"
+        className="refresh-button group fixed bottom-4 right-4 sm:bottom-8 sm:right-8 w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16"
         title="Refresh Data"
       >
         <svg 
-          className={`w-6 h-6 transition-all duration-300 ${loading ? 'animate-spin' : 'group-hover:rotate-180'}`} 
+          className={`w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 transition-all duration-300 ${loading ? 'animate-spin' : 'group-hover:rotate-180'}`} 
           fill="none" 
           stroke="currentColor" 
           viewBox="0 0 24 24"
