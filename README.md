@@ -2,6 +2,11 @@
 
 PulseHub is a modern social media hot topics aggregation platform that collects and displays trending topics from multiple platforms in real-time, including Weibo, Douyin, Bilibili, Zhihu and other mainstream social media platforms.
 
+## 🚀 One-Click Deploy
+
+[![Deploy to Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/fullstackjam/pulsehub)
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/fullstackjam/pulsehub)
+
 ## ✨ Features
 
 - 🔥 **Real-time Hot Topics Aggregation** - Collect trending topics from 10+ mainstream platforms
