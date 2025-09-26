@@ -1,15 +1,33 @@
 {{- if .Values.ingress.enabled -}}
+{{- $fullName := include "pulsehub.fullname" . -}}
+{{- $svcPort := .Values.service.port -}}
+{{- $ingressAnnotations := .Values.ingress.annotations | deepCopy -}}
+{{- if and .Values.ingress.className (not (hasKey $ingressAnnotations "kubernetes.io/ingress.class")) }}
+  {{- $_ := set $ingressAnnotations "kubernetes.io/ingress.class" .Values.ingress.className}}
+{{- end }}
+{{- if semverCompare ">=1.19-0" .Capabilities.KubeVersion.GitVersion -}}
 apiVersion: networking.k8s.io/v1
+{{- else if semverCompare ">=1.14-0" .Capabilities.KubeVersion.GitVersion -}}
+apiVersion: networking.k8s.io/v1beta1
+{{- else -}}
+apiVersion: extensions/v1beta1
+{{- end }}
 kind: Ingress
 metadata:
-  name: {{ include "pulsehub.fullname" . }}
+  name: {{ $fullName }}
   labels:
     {{- include "pulsehub.labels" . | nindent 4 }}
-  {{- with .Values.ingress.annotations }}
+    {{- with .Values.ingress.labels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+  {{- with $ingressAnnotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
   {{- end }}
 spec:
+  {{- if and .Values.ingress.className (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion) }}
+  ingressClassName: {{ .Values.ingress.className }}
+  {{- end }}
   rules:
     {{- range .Values.ingress.hosts }}
     - host: {{ .host | quote }}
@@ -20,9 +38,19 @@ spec:
             pathType: {{ .pathType }}
             backend:
               service:
-                name: {{ include "pulsehub.fullname" $ }}
+                name: {{ $fullName }}
                 port:
-                  number: {{ $.Values.service.port }}
+                  number: {{ $svcPort }}
           {{- end }}
     {{- end }}
+  {{- if .Values.ingress.tls }}
+  tls:
+    {{- range .Values.ingress.tls }}
+    - hosts:
+        {{- range .hosts }}
+        - {{ . | quote }}
+        {{- end }}
+      secretName: {{ .secretName }}
+    {{- end }}
+  {{- end }}
 {{- end }}
