@@ -238,6 +238,54 @@ The project uses Tailwind CSS, you can customize styles by modifying `src/index.
 
 ## 🚀 Deployment Options
 
+### Kubernetes Deployment with Helm
+
+PulseHub includes a complete Helm chart for Kubernetes deployment with the following features:
+
+#### Prerequisites
+- Kubernetes cluster (1.19+)
+- Helm 3.x
+- Nginx Ingress Controller
+- cert-manager (for TLS certificates)
+- external-dns (for DNS management)
+- ArgoCD (for GitOps deployment)
+
+#### Ingress Annotations
+The Helm chart includes comprehensive annotations for external access:
+
+```yaml
+annotations:
+  # Nginx Ingress Controller
+  nginx.ingress.kubernetes.io/ssl-redirect: "true"
+  nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+  nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+  nginx.ingress.kubernetes.io/proxy-body-size: "1m"
+  nginx.ingress.kubernetes.io/enable-cors: "true"
+  nginx.ingress.kubernetes.io/cors-allow-origin: "*"
+  
+  # External DNS for Cloudflare Tunnel
+  external-dns.alpha.kubernetes.io/target: "homelab-tunnel.fullstackjam.com"
+  external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+  
+  # Certificate management
+  cert-manager.io/cluster-issuer: "letsencrypt-prod"
+  
+  # ArgoCD sync
+  argocd.argoproj.io/sync-wave: "1"
+```
+
+#### Deployment Commands
+```bash
+# Install with Helm
+helm install pulsehub ./helm/pulsehub --namespace pulsehub --create-namespace
+
+# Upgrade deployment
+helm upgrade pulsehub ./helm/pulsehub --namespace pulsehub
+
+# Uninstall
+helm uninstall pulsehub --namespace pulsehub
+```
+
 ### Static Hosting Services
 
 - **Vercel** - One-click deployment from GitHub
