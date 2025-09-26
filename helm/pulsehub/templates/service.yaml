@@ -1,11 +1,15 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: plusehub
+  name: {{ include "pulsehub.fullname" . }}
+  labels:
+    {{- include "pulsehub.labels" . | nindent 4 }}
 spec:
-  selector:
-    app: plusehub
+  type: {{ .Values.service.type }}
   ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 3001
+    - port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.targetPort }}
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "pulsehub.selectorLabels" . | nindent 4 }}

@@ -1,15 +1,21 @@
-replicaCount: 1
+# 这是一个示例 values 文件，展示了如何自定义 PulseHub 的配置
 
+# 副本数量
+replicaCount: 2
+
+# 镜像配置
 image:
   repository: fullstackjam/plusehub
   pullPolicy: Always
-  tag: latest
+  tag: v1.0.0
 
+# 服务配置
 service:
   type: ClusterIP
   port: 3001
   targetPort: 3001
 
+# Ingress 配置
 ingress:
   enabled: true
   className: nginx
@@ -27,16 +33,20 @@ ingress:
       hosts:
         - plusehub.fullstackjam.com
 
+# 资源限制
 resources:
   limits:
-    cpu: 500m
-    memory: 512Mi
+    cpu: 1000m
+    memory: 1Gi
   requests:
-    cpu: 100m
-    memory: 128Mi
+    cpu: 200m
+    memory: 256Mi
 
+# 节点选择器（可选）
 nodeSelector: {}
 
+# 容忍度（可选）
 tolerations: []
 
+# 亲和性（可选）
 affinity: {}
