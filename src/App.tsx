@@ -41,12 +41,6 @@ const PLATFORM_CONFIG = [
     color: '#ff6600'
   },
   {
-    platform: '36kr',
-    displayName: '36Kr Hot List',
-    icon: '36',
-    color: '#00d4aa'
-  },
-  {
     platform: 'huxiu',
     displayName: 'Huxiu Hot Articles',
     icon: 'H',
