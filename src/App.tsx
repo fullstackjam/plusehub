@@ -162,7 +162,7 @@ function App() {
       <button
         onClick={refreshData}
         disabled={loading}
-        className="refresh-button group fixed bottom-4 right-4 sm:bottom-8 sm:right-8 w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16"
+        className="refresh-button group fixed top-4 right-4 sm:top-6 sm:right-6 lg:top-8 lg:right-8 w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16"
         title="Refresh Data"
       >
         <svg 
