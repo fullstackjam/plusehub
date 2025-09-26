@@ -5,6 +5,16 @@ image:
   repository: fullstackjam/pulsehub
   tag: latest
 
+service:
+  type: ClusterIP
+  port: 80
+
 ingress:
   enabled: true
   host: pulsehub.fullstackjam.com
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
