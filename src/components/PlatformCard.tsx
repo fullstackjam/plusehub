@@ -27,7 +27,7 @@ const PlatformCard: React.FC<PlatformCardProps> = ({
 
   return (
     <div
-      className="platform-card group relative bg-white/90 backdrop-blur-sm rounded-xl sm:rounded-2xl shadow-xl border border-white/20 p-5 sm:p-6 lg:p-8 hover:shadow-2xl hover:scale-105 transition-all duration-500 cursor-move"
+      className="platform-card group relative bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm rounded-xl sm:rounded-2xl shadow-xl border border-white/20 dark:border-slate-700/50 p-5 sm:p-6 lg:p-8 hover:shadow-2xl hover:scale-105 transition-all duration-500 cursor-move"
       draggable
       onDragStart={(e) => onDragStart(e, platform)}
       onDragEnd={onDragEnd}
@@ -45,8 +45,8 @@ const PlatformCard: React.FC<PlatformCardProps> = ({
             {icon}
           </div>
           <div className="min-w-0 flex-1">
-            <h3 className="font-bold text-slate-800 text-base sm:text-lg lg:text-xl truncate">{displayName}</h3>
-            <p className="text-slate-500 text-sm sm:text-base">
+            <h3 className="font-bold text-slate-800 dark:text-slate-100 text-base sm:text-lg lg:text-xl truncate">{displayName}</h3>
+            <p className="text-slate-500 dark:text-slate-400 text-sm sm:text-base">
               {data ? `${data.topics.length} topics` : 'No data'}
             </p>
           </div>
@@ -55,11 +55,11 @@ const PlatformCard: React.FC<PlatformCardProps> = ({
         <button
           onClick={handleRefresh}
           disabled={loading}
-          className="refresh-btn opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-1.5 sm:p-2 rounded-lg hover:bg-slate-100 disabled:opacity-50 flex-shrink-0"
+          className="refresh-btn opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-1.5 sm:p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 disabled:opacity-50 flex-shrink-0"
           title="Refresh"
         >
           <svg 
-            className={`w-4 h-4 sm:w-5 sm:h-5 text-slate-600 ${loading ? 'animate-spin' : ''}`} 
+            className={`w-4 h-4 sm:w-5 sm:h-5 text-slate-600 dark:text-slate-300 ${loading ? 'animate-spin' : ''}`} 
             fill="none" 
             stroke="currentColor" 
             viewBox="0 0 24 24"
@@ -84,13 +84,13 @@ const PlatformCard: React.FC<PlatformCardProps> = ({
         
         {error && (
           <div className="flex flex-col items-center justify-center h-32 sm:h-40 lg:h-48 text-center px-2">
-            <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 rounded-full bg-red-100 flex items-center justify-center mb-3 sm:mb-4">
-              <svg className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 rounded-full bg-red-100 dark:bg-red-900/20 flex items-center justify-center mb-3 sm:mb-4">
+              <svg className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 text-red-500 dark:text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
               </svg>
             </div>
-            <p className="text-red-600 font-medium mb-1 sm:mb-2 text-sm sm:text-base">Data fetch failed</p>
-            <p className="text-red-500 text-xs sm:text-sm">{error}</p>
+            <p className="text-red-600 dark:text-red-400 font-medium mb-1 sm:mb-2 text-sm sm:text-base">Data fetch failed</p>
+            <p className="text-red-500 dark:text-red-300 text-xs sm:text-sm">{error}</p>
           </div>
         )}
         
@@ -102,20 +102,20 @@ const PlatformCard: React.FC<PlatformCardProps> = ({
                 href={topic.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block p-2.5 rounded-md bg-slate-50 hover:bg-slate-100 transition-colors duration-200 group/link"
+                className="block p-2.5 rounded-md bg-slate-50 dark:bg-slate-700/50 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors duration-200 group/link"
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-3 flex-1 min-w-0">
-                    <span className="text-slate-400 text-sm font-mono flex-shrink-0 w-6 text-center">
+                    <span className="text-slate-400 dark:text-slate-500 text-sm font-mono flex-shrink-0 w-6 text-center">
                       {topic.rank}
                     </span>
-                    <p className="text-slate-800 font-medium text-sm leading-snug group-hover/link:text-blue-600 transition-colors duration-200 line-clamp-1 flex-1">
+                    <p className="text-slate-800 dark:text-slate-200 font-medium text-sm leading-snug group-hover/link:text-blue-600 dark:group-hover/link:text-blue-400 transition-colors duration-200 line-clamp-1 flex-1">
                       {topic.title}
                     </p>
                   </div>
                   <div className="flex items-center space-x-2 ml-3 flex-shrink-0">
                     {topic.hot && topic.hot > 0 && (
-                      <span className="text-xs text-red-500 font-medium bg-red-50 px-2 py-1 rounded-full">
+                      <span className="text-xs text-red-500 dark:text-red-400 font-medium bg-red-50 dark:bg-red-900/20 px-2 py-1 rounded-full">
                         {topic.hot > 10000 ? `${(topic.hot / 10000).toFixed(1)}w` : topic.hot}
                       </span>
                     )}
@@ -124,13 +124,13 @@ const PlatformCard: React.FC<PlatformCardProps> = ({
                         {topic.platforms.slice(0, 2).map((platform, idx) => (
                           <span
                             key={idx}
-                            className="px-1.5 py-0.5 bg-blue-100 text-blue-600 text-xs rounded-full"
+                            className="px-1.5 py-0.5 bg-blue-100 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 text-xs rounded-full"
                           >
                             {platform}
                           </span>
                         ))}
                         {topic.platforms.length > 2 && (
-                          <span className="text-slate-500 text-xs">+{topic.platforms.length - 2}</span>
+                          <span className="text-slate-500 dark:text-slate-400 text-xs">+{topic.platforms.length - 2}</span>
                         )}
                       </div>
                     )}
@@ -141,7 +141,7 @@ const PlatformCard: React.FC<PlatformCardProps> = ({
             
             {data.topics.length > 8 && (
               <div className="text-center pt-2">
-                <span className="text-slate-500 text-sm">
+                <span className="text-slate-500 dark:text-slate-400 text-sm">
                   +{data.topics.length - 8} more topics
                 </span>
               </div>

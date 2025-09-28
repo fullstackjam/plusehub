@@ -78,6 +78,11 @@ button:focus-visible {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
+.header-gradient-dark {
+  background: linear-gradient(135deg, #4c1d95 0%, #7c3aed 100%);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
 .loading-spinner {
   width: 40px;
   height: 40px;
@@ -85,6 +90,11 @@ button:focus-visible {
   border-top: 4px solid #667eea;
   border-radius: 50%;
   animation: spin 1s linear infinite;
+}
+
+.dark .loading-spinner {
+  border-color: #374151;
+  border-top-color: #8b5cf6;
 }
 
 @keyframes spin {
@@ -108,9 +118,18 @@ button:focus-visible {
   z-index: 1000;
 }
 
+.dark .refresh-button {
+  background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);
+  box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
+}
+
 .refresh-button:hover {
   transform: translateY(-2px);
   box-shadow: 0 12px 35px rgba(102, 126, 234, 0.4);
+}
+
+.dark .refresh-button:hover {
+  box-shadow: 0 12px 35px rgba(139, 92, 246, 0.5);
 }
 
 .refresh-button:disabled {
@@ -132,9 +151,18 @@ button:focus-visible {
   transition: all 0.3s ease;
 }
 
+.dark .github-link {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
 .github-link:hover {
   background: rgba(255, 255, 255, 0.2);
   transform: translateY(-2px);
+}
+
+.dark .github-link:hover {
+  background: rgba(255, 255, 255, 0.1);
 }
 
 /* Responsive improvements */
@@ -197,6 +225,27 @@ button:focus-visible {
   .platform-card {
     border-width: 0.5px;
   }
+}
+
+/* Theme toggle button styles */
+.theme-toggle {
+  position: relative;
+  overflow: hidden;
+}
+
+.theme-toggle::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.theme-toggle:hover::before {
+  left: 100%;
 }
 
 /* Dark mode support */
