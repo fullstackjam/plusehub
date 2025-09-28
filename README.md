@@ -1,6 +1,6 @@
 # PulseHub - Social Media Hot Topics Aggregation Platform
 
-PulseHub is a modern social media hot topics aggregation platform that collects and displays trending topics from multiple platforms in real-time, including Weibo, Douyin, Bilibili, Zhihu and other mainstream social media platforms.
+PulseHub is a modern React-based social media hot topics aggregation platform that collects and displays trending topics from multiple Chinese platforms in real-time. Built with TypeScript and Vite, it provides a clean, responsive interface for monitoring hot topics across Weibo, Douyin, Bilibili, Zhihu, Baidu, and Toutiao.
 
 ## 🚀 One-Click Deploy
 
@@ -9,13 +9,15 @@ PulseHub is a modern social media hot topics aggregation platform that collects 
 
 ## ✨ Features
 
-- 🔥 **Real-time Hot Topics Aggregation** - Collect trending topics from 10+ mainstream platforms
-- 🎨 **Modern UI Design** - Features glassmorphism and gradient design
-- 🖱️ **Drag & Drop Sorting** - Support card drag and drop reordering
-- 🔄 **Independent Refresh** - Each platform can refresh data independently
-- 📱 **Responsive Design** - Perfect adaptation to various devices
-- 🚀 **Pure Frontend** - No backend required, direct API calls from user's browser
-- ⚡ **Fast Loading** - Direct data fetching for optimal performance
+- 🔥 **Real-time Hot Topics Aggregation** - Collect trending topics from 6 major Chinese platforms
+- 🎨 **Modern UI Design** - Features glassmorphism effects with gradient backgrounds and smooth animations
+- 🖱️ **Drag & Drop Sorting** - Reorder platform cards with intuitive drag and drop functionality
+- 🔄 **Independent Refresh** - Each platform card can refresh data independently
+- 📱 **Fully Responsive** - Optimized for desktop, tablet, and mobile devices
+- 🚀 **Pure Frontend Application** - No backend required, direct API calls from user's browser
+- ⚡ **Fast Performance** - Built with Vite for optimal build speed and development experience
+- 🔗 **Smart URL Generation** - Automatic link generation to search pages for each platform
+- 📊 **Aggregated View** - Cross-platform hot topics detection and display
 
 ## 🏗️ Tech Stack
 
@@ -26,8 +28,9 @@ PulseHub is a modern social media hot topics aggregation platform that collects 
 - **Tailwind CSS** - Atomic CSS framework
 
 ### Data Sources
-- **60s API** - Real-time hot topics from multiple platforms
-- **Direct API Calls** - No proxy, using user's IP for requests
+- **60s API** - Real-time hot topics aggregation service (https://60s.viki.moe)
+- **Direct API Calls** - No proxy required, using user's IP for requests
+- **CORS-enabled** - Cross-origin requests handled properly
 
 ## 🚀 Quick Start
 
@@ -46,21 +49,17 @@ cd pulsehub
 
 2. **Install dependencies**
 ```bash
-# Install dependencies
 npm install
-
-# Install frontend dependencies
-cd frontend && npm install
 ```
 
 3. **Start development server**
 ```bash
-# Start frontend development server
 npm run dev
 ```
 
 4. **Access the application**
 - Application: http://localhost:3000
+- The development server will automatically reload when you make changes
 
 ### Docker Deployment
 
@@ -117,28 +116,31 @@ kubectl get pods -n pulsehub
 PulseHub/
 ├── src/                     # Source code
 │   ├── components/          # React components
-│   │   ├── Dashboard.tsx    # Main dashboard component
-│   │   └── PlatformCard.tsx # Platform card component
+│   │   ├── Dashboard.tsx    # Main dashboard component with drag & drop
+│   │   └── PlatformCard.tsx # Individual platform card component
 │   ├── services/           # API services
-│   │   └── api.ts          # Direct API calls to external services
+│   │   └── api.ts          # 60s API integration and data transformation
 │   ├── types/              # TypeScript type definitions
-│   │   └── index.ts        # Type definitions
-│   ├── App.tsx             # Main application component
-│   ├── main.tsx            # Application entry point
-│   └── index.css           # Global styles
-├── dist/                   # Built files for production
-├── public/                 # Static assets
-├── package.json            # Dependencies and scripts
-├── vite.config.ts          # Vite configuration
+│   │   └── index.ts        # Type definitions for platforms and topics
+│   ├── App.tsx             # Main application component and platform config
+│   ├── main.tsx            # React application entry point
+│   └── index.css           # Global styles with custom animations
+├── dist/                   # Built files for production (generated)
+├── helm/                   # Kubernetes Helm Charts
+│   └── pulsehub/
+│       ├── templates/      # Kubernetes deployment templates
+│       │   ├── deployment.yaml
+│       │   ├── service.yaml
+│       │   └── ingress.yaml
+│       ├── Chart.yaml      # Helm chart metadata
+│       ├── values.yaml     # Default configuration values
+│       └── README.md       # Helm deployment documentation
+├── package.json            # Dependencies and npm scripts
+├── vite.config.ts          # Vite build configuration
 ├── tailwind.config.js      # Tailwind CSS configuration
 ├── tsconfig.json           # TypeScript configuration
-├── Dockerfile              # Docker build file
-├── .dockerignore           # Docker ignore file
-└── helm/                   # Helm Charts
-    └── pulsehub/
-        ├── templates/      # Kubernetes templates
-        ├── Chart.yaml      # Chart metadata
-        └── values.yaml     # Configuration values
+├── Dockerfile              # Multi-stage Docker build file
+└── README.md               # This documentation
 ```
 
 ## 🔧 Configuration
@@ -181,16 +183,13 @@ export default {
 
 ## 📊 Supported Data Sources
 
-- **Weibo Hot Search** - Real-time trending topics
-- **Douyin Hot List** - Short video platform hotspots
-- **Bilibili Hot List** - Video platform popular content
-- **Zhihu Hot List** - Knowledge Q&A platform hotspots
-- **Baidu Hot Search** - Search engine hotspots
-- **Toutiao Hot List** - News and information hotspots
-- **36Kr Hot List** - Technology and venture capital hotspots
-- **Huxiu Hot Articles** - Business and technology news
-- **Douban Hot List** - Culture and entertainment hotspots
-- **Hupu Hot List** - Sports community hotspots
+- **Weibo Hot Search** - Real-time trending topics from China's largest microblogging platform
+- **Douyin Hot List** - Short video platform hotspots and viral content
+- **Bilibili Hot List** - Video platform popular content and trending topics
+- **Zhihu Hot List** - Knowledge Q&A platform trending discussions
+- **Baidu Hot Search** - Search engine trending queries and topics
+- **Toutiao Hot List** - News and information platform trending articles
+- **Aggregated Hot Topics** - Cross-platform trending topics that appear on multiple platforms
 
 ## 🛠️ Development Guide
 
@@ -207,7 +206,7 @@ static async fetchPlatformData(platform: string): Promise<PlatformResponse> {
   
   const endpoint = endpointMap[platform];
   if (!endpoint) {
-    return this.getMockData(platform);
+    throw new Error(`Platform ${platform} is not supported by the API`);
   }
   
   const data = await this.fetchFrom60sAPI(endpoint);
@@ -227,6 +226,15 @@ const PLATFORM_CONFIG = [
     color: '#ff6b35'
   }
 ];
+```
+
+3. **Update URL Template**
+```typescript
+// src/services/api.ts
+const urlTemplates: Record<string, string> = {
+  // ... existing templates
+  newplatform: 'https://newplatform.com/search?q={query}',
+};
 ```
 
 ### Custom Styling
@@ -301,19 +309,26 @@ helm uninstall pulsehub --namespace pulsehub
 
 ## 📝 Changelog
 
-### v2.0.0 (2024-09-26)
-- 🚀 **Major Architecture Change** - Removed backend dependency
-- ⚡ **Direct API Calls** - Frontend directly requests external APIs using user's IP
-- 🎯 **Simplified Deployment** - Pure frontend application, deploy to any static hosting
-- 🔧 **Improved Performance** - No server proxy, faster data loading
-- 🛠️ **Easier Maintenance** - Single codebase, no backend to maintain
+### v2.0.0 (Current)
+- 🚀 **Pure Frontend Architecture** - No backend dependency, direct API calls
+- ⚡ **60s API Integration** - Real-time data from https://60s.viki.moe
+- 🎯 **Simplified Deployment** - Deploy to any static hosting service
+- 🔧 **Improved Performance** - Optimized build with Vite and code splitting
+- 🛠️ **TypeScript Migration** - Full type safety and better development experience
+- 🎨 **Enhanced UI** - Glassmorphism design with smooth animations
+- 📊 **Cross-platform Analysis** - Aggregated hot topics across multiple platforms
+- 🖱️ **Drag & Drop Interface** - Intuitive platform card reordering
+- 🔄 **Independent Refresh** - Per-platform data refresh functionality
 
-### v1.0.0 (2024-09-26)
-- ✨ Initial version release
-- 🔥 Support for 10+ platform hot topic aggregation
-- 🎨 Modern UI design
-- 🖱️ Drag and drop sorting functionality
-- 🔄 Independent refresh functionality
+### Key Features
+- React 18 with TypeScript
+- Vite build system for fast development and optimized production builds
+- Tailwind CSS for responsive design
+- Docker containerization with multi-stage builds
+- Kubernetes Helm chart for production deployment
+- CORS-enabled API integration
+- Smart URL generation for each platform
+- Responsive design for all device sizes
 
 ## 🤝 Contributing
 
